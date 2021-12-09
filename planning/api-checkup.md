@@ -74,6 +74,7 @@ Ideas that aren't basic for what to record
 Other ideas about the thing
 - We could get match info after the fact and form some sort of a score, and build models that try to predict the score based on pre-game start information.
 - Then we could use gradient descent or something like that, rather than a decision tree or whatever it's called.
+  - Making a lot of different real-valued functions for this, and collecting data for challenger elo and lower elo games would lead to a lot of different combinations of shits
 
 
 
