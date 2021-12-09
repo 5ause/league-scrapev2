@@ -64,6 +64,14 @@ Info
 - hotstreak = 3+ wins in a row
 - freshBlood: probably if you're new to a division
 
+### Current Game info
+/lol/spectator/v4/active-games/by-summoner/{encryptedSummonerId} --> uses id from summoner info
+
+Things you can get(from participants)
+ - championId
+ - teamId
+ - summonerId
+
 ## Some ideas of what we want to record[IMPORTANT]
 Ideas that aren't basic for what to record
 
