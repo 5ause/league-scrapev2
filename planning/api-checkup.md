@@ -24,6 +24,7 @@ Info about a user's matches. Need puuid
 ### Specific match
 /lol/match/v5/matches/{matchId} gets info about a specific match.
 - metadata, info.
+- teamId: 200=red, 100=blue
 
 Metadata
 - participants: list of puuids of the participants
