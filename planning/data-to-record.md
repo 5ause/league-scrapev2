@@ -54,3 +54,13 @@ So maybe we look at that. Like cs/min + damage + objectives + kda + vision etc.
   - sometimes when you get more kills, your cs/min goes down, so maybe we gotta look at like gold/min
   
 LOOK AT ABOVE HYPOTHESES AND RECORD THOSE
+
+[a guy on twitter made a similar bot](https://twitter.com/kshuna/status/1471946830342762502)
+- he found that a person's personal winrate on the champ that they are playing is important.
+    - I think the only way to do this is to take every single game and calculate shit... we'll find the number of games played using ranked w/l rate, and then take a max of 50 games or something and then look at each individual game to see how much the person plays the specific champ, and how much they win I guess
+    - We'll also record things such as average objective damage/min, damage/min, etc. maybe? and also record the number of times they play each role or something...
+- he identified the top/mid/bot/jg/sup whatever and got their personal champ win rates, that sounds interesting
+- So basically we'll look at a person's role, look for other games on that champ in that role, and see how they do? in terms of objectives, gold, kp, etc.?
+- So the main idea is we look at each role and give in depth metrics about their past performance, and try to predict using that.
+
+I think that's the only way to look at the game without entering the player that's playing, we will identify each player and go like blue_top, red_mid, etc. It will be good.
