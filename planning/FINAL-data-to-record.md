@@ -40,3 +40,11 @@ get games thru matchv5, filter for ranked solo.
 - [P@_KDA] champion kda[(k+a)/d]
 - [P@_ROLEWR] role wr
 - [P@_ROLEPLAYED] role #played.
+
+# Current Games
+You can check the JSON for what data you can get on a current running game.
+
+[here](https://riot-api-libraries.readthedocs.io/en/latest/roleid.html) is how to find role id. Check the 
+github repo on the second thing. Go to examples and shit, use pip to install shit.
+
+We're gonna get role being played(assuming you must fit top mid bot sup jg), player ids and that's ALL.
