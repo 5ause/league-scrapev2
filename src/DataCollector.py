@@ -47,6 +47,27 @@ class BasicSummonerInfo:
         return "Name: " + self.summoner_name + ", id: " + self.summoner_id + ", puuid: " + self.summoner_puuid
 
 
+def process_summoner_v4(json):
+    for i in json:
+        if i["queueType"] == "RANKED_SOLO_5x5":
+            ptier = i["tier"]
+            prank = i["rank"]
+            plp = i["leaguePoints"]
+            pwins = i["wins"]
+            plosses = i[ "losses"]
+            pveteran = i["veteran"]
+            pinative = i["inactive"]
+            pfreshblood = i["freshBlood"]
+            photstreak = i["hotStreak"]
+        return ptier, prank, plp, pwins, plosses, pveteran, pinative, pfreshblood, photstreak
+"""
+League v4/byID
+- [P@_TIER]: ranked solo duo tier
+- [P@_RANK]: solo duo rank
+- [P@_LP]: ranked solo duo LP 
+- [P@_WINS, P@_LOSSES]: ranked #wins, #losses
+- [P@_V, P@_I, P@_FB, P@_HS]: veteran, inactive, freshBlood, hotStreak
+"""
 """
 Examples
 
