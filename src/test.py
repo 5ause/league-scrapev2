@@ -1,20 +1,19 @@
 import RequestSender
 import time
-import requests
 
 
 def test_requests():
-    RequestSender.DICT_OF_KEYS = {"RGAPI-2e562809-efb3-4116-aaeb-b44da21b77a1": 0,
-                                  "RGAPI-1a6e7073-d658-4461-a0ad-256d0585f865": 0,
-                                  "RGAPI-b3e61abb-f9a4-42e9-8cfd-07c05a8e1553": 0}
+    RequestSender.add_keys(["RGAPI-2e562809-efb3-4116-aaeb-b44da21b77a1",
+                            "RGAPI-1a6e7073-d658-4461-a0ad-256d0585f865",
+                            "RGAPI-b3e61abb-f9a4-42e9-8cfd-07c05a8e1553"])
 
     codes = dict()
 
-    def add_code(code, codes):
-        if code not in codes:
-            codes[code] = 1
+    def add_code(code, cdodes):
+        if code not in cdodes:
+            cdodes[code] = 1
         else:
-            codes[code] += 1
+            cdodes[code] += 1
 
     url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/PlatypusOfCanada?api_key=<API_KEY>"
 

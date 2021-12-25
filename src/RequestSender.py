@@ -1,9 +1,16 @@
+from typing import List
+
 import requests
 import Logger
 import time
 
 # dict will be key: time
 DICT_OF_KEYS = dict()
+
+
+def add_keys(keys: List[str]):
+    for key in keys:
+        DICT_OF_KEYS[key] = 0
 
 
 # put API_KEY in variables if you need an api key.
