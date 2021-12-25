@@ -1,3 +1,5 @@
+import requests
+
 import RequestSender
 import time
 import DataCollector
@@ -6,9 +8,7 @@ import Logger
 
 
 def enter_api_keys():
-    RequestSender.add_keys(["RGAPI-2e562809-efb3-4116-aaeb-b44da21b77a1",
-                            "RGAPI-1a6e7073-d658-4461-a0ad-256d0585f865",
-                            "RGAPI-b3e61abb-f9a4-42e9-8cfd-07c05a8e1553"])
+    RequestSender.add_keys(["RGAPI-a1094f0e-4833-464e-87ad-a35091fcda83", "RGAPI-4781138d-8763-48f9-b7c9-20f54bf6b059"])
 
 
 def test_requests():
@@ -41,14 +41,25 @@ def test_process_url():
            "www.google.ca/hello/MYman"
 
 
-def test_summoner_v4():
+def test_summoner_v4(name):
     Logger.VERBOSITY_LEVEL = "ALL"
     try:
-        enter_api_keys()
-        platypus_of_canada = DataCollector.BasicSummonerInfo("PlatypusOfCanada")
-        print(platypus_of_canada)
+        player = DataCollector.BasicSummonerInfo(name)
+        print(player)
+        ranked_info = DataCollector.SummonerRankedInfo(player)
+        print(ranked_info.rank, ranked_info.tier, ranked_info.lp)
     except CustomExceptions.APICallException as e:
         print(e)
 
 
-test_summoner_v4()
+enter_api_keys()
+test_summoner_v4("PlatypusOfCanada")
+test_summoner_v4("waste it on me")
+
+# for i in range(0, 3):
+#     response = RequestSender.send_request(
+#         "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/PlatypusOfCanada?api_key=<API_KEY>")
+#     print(response.json())
+    # TODO IT TURNS OUT YOU NEED 1 API KEY FOR EACH INDIVIDUAL SUMMONER BRUHHH
+    # for get_api_key maybe do request a specific key or something and let it auto sleep for u like overload the method
+    # to get_api_key(key) or something

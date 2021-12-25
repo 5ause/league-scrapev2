@@ -2,6 +2,7 @@ import requests
 import CustomExceptions
 import RequestSender
 import Logger
+import json
 
 SUMMONER_V4_URL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/<SUM_NAME>?api_key=<API_KEY>"
 LEAGUE_V4_URL = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/<ID>?api_key=<API_KEY>"
@@ -14,6 +15,7 @@ def get_rgapi_json(response: requests.Response):
     elif not response.ok:
         raise CustomExceptions.APICallException("API Call failed: " + str(response.content))
     else:
+        Logger.debug("Successfully converted to JSON")
         return response.json()
 
 
@@ -23,15 +25,15 @@ def get_rgapi_json(response: requests.Response):
 
 
 def send_summoner_v4(name: str):
-    name = name.replace(" ", "")
-    variables = {"SUM_NAME": name}
-    return RequestSender.send_request(SUMMONER_V4_URL, variables=variables)
+    name = name.replace(" ", "%20")
+    variables = {"SUM_NAME": name, "API_KEY": RequestSender.get_api_key()}
+    return RequestSender.send_request(SUMMONER_V4_URL, variables=variables), variables["API_KEY"]
 
 
-def process_summoner_v4(json):
-    sum_name = json["name"]
-    sum_id = json["id"]
-    sum_puuid = json["puuid"]
+def process_summoner_v4(jason):
+    sum_name = jason["name"]
+    sum_id = jason["id"]
+    sum_puuid = jason["puuid"]
     return sum_name, sum_id, sum_puuid
 
 
@@ -41,7 +43,7 @@ class BasicSummonerInfo:
     """
 
     def __init__(self, name: str):
-        response = send_summoner_v4(name)
+        response, self.api_key = send_summoner_v4(name)
         self.summoner_name, self.summoner_id, self.summoner_puuid = process_summoner_v4(get_rgapi_json(response))
         Logger.debug("Got info for " + self.summoner_name)
 
@@ -50,19 +52,20 @@ class BasicSummonerInfo:
 
 
 class SummonerRankedInfo:
-    def __init__(self, s_id: str):
-        response = send_league_v4(s_id)
+    def __init__(self, bsi: BasicSummonerInfo):
+        response, self.api_key = send_league_v4(bsi)
         self.tier, self.rank, self.lp, self.wins, self.losses, self.veteran, self.inactive, self.freshblood, \
         self.hotstreak = process_league_v4(get_rgapi_json(response))
+        Logger.debug("got ranked info for " + bsi.summoner_name)
 
 
-def send_league_v4(id: str):
-    variables = {"ID": id}
-    return RequestSender.send_request(LEAGUE_V4_URL, variables=variables)
+def send_league_v4(bsi: BasicSummonerInfo):
+    variables = {"ID": bsi.summoner_id, "API_KEY": bsi.api_key}
+    return RequestSender.send_request(LEAGUE_V4_URL, variables=variables), variables["API_KEY"]
 
 
-def process_league_v4(json):
-    for i in json:
+def process_league_v4(jason):
+    for i in jason:
         if i["queueType"] == "RANKED_SOLO_5x5":
             ptier = i["tier"]
             prank = i["rank"]
@@ -73,7 +76,8 @@ def process_league_v4(json):
             pinative = i["inactive"]
             pfreshblood = i["freshBlood"]
             photstreak = i["hotStreak"]
-        return ptier, prank, plp, pwins, plosses, pveteran, pinative, pfreshblood, photstreak
+            return ptier, prank, plp, pwins, plosses, pveteran, pinative, pfreshblood, photstreak
+    return None, None, None, None, None, None, None, None, None
 
 
 """

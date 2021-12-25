@@ -29,25 +29,30 @@ def send_request(url: str, variables=dict(), headers=dict(), method="GET") -> re
 
 
 def process_url(url, variables):
-    if "<API_KEY>" in url:
+    if "<API_KEY>" in url and "API_KEY" not in variables:
         url = url.replace("<API_KEY>", get_api_key())
+    if "<API_KEY>" in url and "API_KEY" in variables:
+        url = url.replace("<API_KEY>", get_api_key(variables["API_KEY"]))
     for key in variables:
         url = url.replace("<" + key + ">", variables[key])
     return url
 
 
-def get_api_key() -> str:
+def get_api_key(api_key=None) -> str:
     time_between_reqs = 1.2
     # int(time.time()) is in seconds ok
     # find the least recent key
-    recent = None
-    api_key = None
-    for key in DICT_OF_KEYS:
-        if recent is None or DICT_OF_KEYS[key] < recent:
-            recent = DICT_OF_KEYS[key]
-            api_key = key
-    if recent is None or api_key is None:
-        raise CustomExceptions.APICallException("No API keys entered.")
+
+    if api_key is None:
+        recent = None
+        for key in DICT_OF_KEYS:
+            if recent is None or DICT_OF_KEYS[key] < recent:
+                recent = DICT_OF_KEYS[key]
+                api_key = key
+        if recent is None or api_key is None:
+            raise CustomExceptions.APICallException("No API keys entered.")
+    else:
+        recent = DICT_OF_KEYS[api_key]
 
     # Wait the appropriate amount of time
     time_now = round(time.time(), 1)
