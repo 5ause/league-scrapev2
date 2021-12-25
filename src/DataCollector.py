@@ -4,6 +4,7 @@ import RequestSender
 import Logger
 
 SUMMONER_V4_URL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/<SUM_NAME>?api_key=<API_KEY>"
+LEAGUE_V4_URL = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/<ID>?api_key=<API_KEY>"
 
 
 # TODO make a function that calls the riot api, returns a dict or an error
@@ -14,6 +15,7 @@ def get_rgapi_json(response: requests.Response):
         raise CustomExceptions.APICallException("API Call failed: " + str(response.content))
     else:
         return response.json()
+
 
 # TODO make a function that makes an object of name id puuid from the summoner v4 data
 
@@ -47,19 +49,33 @@ class BasicSummonerInfo:
         return "Name: " + self.summoner_name + ", id: " + self.summoner_id + ", puuid: " + self.summoner_puuid
 
 
-def process_summoner_v4(json):
+class SummonerRankedInfo:
+    def __init__(self, s_id: str):
+        response = send_league_v4(s_id)
+        self.tier, self.rank, self.lp, self.wins, self.losses, self.veteran, self.inactive, self.freshblood, \
+        self.hotstreak = process_league_v4(get_rgapi_json(response))
+
+
+def send_league_v4(id: str):
+    variables = {"ID": id}
+    return RequestSender.send_request(LEAGUE_V4_URL, variables=variables)
+
+
+def process_league_v4(json):
     for i in json:
         if i["queueType"] == "RANKED_SOLO_5x5":
             ptier = i["tier"]
             prank = i["rank"]
             plp = i["leaguePoints"]
             pwins = i["wins"]
-            plosses = i[ "losses"]
+            plosses = i["losses"]
             pveteran = i["veteran"]
             pinative = i["inactive"]
             pfreshblood = i["freshBlood"]
             photstreak = i["hotStreak"]
         return ptier, prank, plp, pwins, plosses, pveteran, pinative, pfreshblood, photstreak
+
+
 """
 League v4/byID
 - [P@_TIER]: ranked solo duo tier
