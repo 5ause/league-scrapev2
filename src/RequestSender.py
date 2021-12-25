@@ -1,7 +1,7 @@
 from typing import List
 
 import requests
-import Logger
+import CustomExceptions
 import time
 
 # dict will be key: time
@@ -44,7 +44,7 @@ def get_api_key() -> str:
             recent = DICT_OF_KEYS[key]
             api_key = key
     if recent is None or api_key is None:
-        Logger.alert("No API keys")
+        raise CustomExceptions.APICallException("No API keys entered.")
 
     # Wait the appropriate amount of time
     time_now = round(time.time(), 1)
