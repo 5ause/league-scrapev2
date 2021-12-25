@@ -2,7 +2,7 @@ import requests
 
 import RequestSender
 import time
-import DataCollector
+import APICollector
 import CustomExceptions
 import Logger
 
@@ -44,18 +44,21 @@ def test_process_url():
 def test_summoner_v4(name):
     Logger.VERBOSITY_LEVEL = "ALL"
     try:
-        player = DataCollector.BasicSummonerInfo(name)
+        player = APICollector.BasicSummonerInfo(name)
         print(player)
-        ranked_info = DataCollector.SummonerRankedInfo(player)
+        ranked_info = APICollector.SummonerRankedInfo(player)
         print(ranked_info.rank, ranked_info.tier, ranked_info.lp)
+        matches = APICollector.SummonerGameInfo(player)
+        print(matches.matches)
     except CustomExceptions.APICallException as e:
         print(e)
 
 
 enter_api_keys()
-test_summoner_v4("PlatypusOfCanada")
+# test_summoner_v4("PlatypusOfCanada")
 test_summoner_v4("waste it on me")
 
+# enter_api_keys()
 # for i in range(0, 3):
 #     response = RequestSender.send_request(
 #         "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/PlatypusOfCanada?api_key=<API_KEY>")

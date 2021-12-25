@@ -21,10 +21,10 @@ def send_request(url: str, variables=dict(), headers=dict(), method="GET") -> re
     # send the req
     if method == "GET":
         response = requests.get(url=url, headers=headers)
-        Logger.debug("sending GET to " + url)
+        Logger.verbose("sending GET to " + url)
     else:
         response = requests.post(url=url, headers=headers)
-        Logger.debug("sending POST to " + url)
+        Logger.verbose("sending POST to " + url)
     return response
 
 

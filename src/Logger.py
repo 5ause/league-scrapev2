@@ -12,6 +12,7 @@ class BColors:
 
 VERBOSITY_LEVEL = "ALL"
 VERBOSITY_DICT = {
+    "VERBOSE": -1,
     "ALL": 0,
     "MSG": 1,
     "WARN": 2,
@@ -24,6 +25,12 @@ VERBOSITY_DICT = {
 
 def check_if_send(level):
     return level >= VERBOSITY_DICT[VERBOSITY_LEVEL]
+
+
+def verbose(msg: str, sender="debug") -> None:
+    if not check_if_send(-1):
+        return
+    print("[" + sender + "]" + msg)
 
 
 def debug(msg: str, sender="debug") -> None:
