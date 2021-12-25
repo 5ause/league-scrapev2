@@ -1,5 +1,9 @@
 import requests
 import CustomExceptions
+import RequestSender
+import Logger
+
+SUMMONER_V4_URL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/<SUM_NAME>?api_key=<API_KEY>"
 
 
 # TODO make a function that calls the riot api, returns a dict or an error
@@ -7,42 +11,41 @@ def get_rgapi_json(response: requests.Response):
     if response.status_code == 403:
         raise CustomExceptions.APICallException("No API KEY probably")
     elif not response.ok:
-        raise CustomExceptions.APICallException("API Call failed, reason unknown.")
+        raise CustomExceptions.APICallException("API Call failed: " + str(response.content))
     else:
         return response.json()
-
-
-# TODO remember that summoner_v4 by name has spaces as %20 instead of space btw
 
 # TODO make a function that makes an object of name id puuid from the summoner v4 data
 
 # TODO make a summoner_v4 object that processes the league_v4 stuff
 
-class SampleClass:
-    def __init__(self, summoner_name):
-        json = self.send_request(summoner_name)
-        self.process_json(json)
 
-    def process_json(self, json):
-        self.summoner_name = ""
-
-    def send_request(self, summoner_name):
-        pass
+def send_summoner_v4(name: str):
+    name = name.replace(" ", "")
+    variables = {"SUM_NAME": name}
+    return RequestSender.send_request(SUMMONER_V4_URL, variables=variables)
 
 
-class DataCollector:
+def process_summoner_v4(json):
+    sum_name = json["name"]
+    sum_id = json["id"]
+    sum_puuid = json["puuid"]
+    return sum_name, sum_id, sum_puuid
+
+
+class BasicSummonerInfo:
     """
     This collects data
     """
-    def __init__(self):
-        self.summoner_name = None
-        self.summoner_id = None
-        self.summoner_puuid = None
 
-    def process_summoner_v4(self, json):
-        self.summoner_name = json["name"]
-        self.summoner_id = json["id"]
-        self.summoner_puuid = json["puuid"]
+    def __init__(self, name: str):
+        response = send_summoner_v4(name)
+        self.summoner_name, self.summoner_id, self.summoner_puuid = process_summoner_v4(get_rgapi_json(response))
+        Logger.debug("Got info for " + self.summoner_name)
+
+    def __str__(self):
+        return "Name: " + self.summoner_name + ", id: " + self.summoner_id + ", puuid: " + self.summoner_puuid
+
 
 """
 Examples

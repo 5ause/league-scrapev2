@@ -3,6 +3,7 @@ from typing import List
 import requests
 import CustomExceptions
 import time
+import Logger
 
 # dict will be key: time
 DICT_OF_KEYS = dict()
@@ -20,13 +21,15 @@ def send_request(url: str, variables=dict(), headers=dict(), method="GET") -> re
     # send the req
     if method == "GET":
         response = requests.get(url=url, headers=headers)
+        Logger.debug("sending GET to " + url)
     else:
         response = requests.post(url=url, headers=headers)
+        Logger.debug("sending POST to " + url)
     return response
 
 
 def process_url(url, variables):
-    if "API_KEY" in variables:
+    if "<API_KEY>" in url:
         url = url.replace("<API_KEY>", get_api_key())
     for key in variables:
         url = url.replace("<" + key + ">", variables[key])

@@ -1,6 +1,6 @@
 class LoggableException(Exception):
-    def __init__(self, type="", msg=""):
-        super.__init__(msg)
+    def __init__(self, msg="", type=""):
+        super().__init__(msg)
         if type in ["alert", "warning", "msg"]:
             self.type = type
         elif type == "a":
