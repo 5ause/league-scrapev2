@@ -4,17 +4,19 @@ import RequestSender
 import Logger
 import json
 
+MATCHES_COUNT = 10
 SUMMONER_V4_URL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/<SUM_NAME>?api_key=<API_KEY>"
 LEAGUE_V4_URL = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/<ID>?api_key=<API_KEY>"
-PAST_MATCHES_URL = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/<PUUID>/ids?queue=420&start=0&count=10&api_key=<API_KEY>"
+PAST_MATCHES_URL = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/<PUUID>/ids?queue=420&start=0&count=<COUNT>&api_key=<API_KEY>"
+MATCH_V5_URL = "https://americas.api.riotgames.com/lol/match/v5/matches/<MATCHID>?api_key=<API_KEY>"
 
 
 # TODO make a function that calls the riot api, returns a dict or an error
 def get_rgapi_json(response: requests.Response):
     if response.status_code == 403:
-        raise CustomExceptions.APICallException("No API KEY probably")
+        raise CustomExceptions.APICallException("No API KEY probably", "a")
     elif not response.ok:
-        raise CustomExceptions.APICallException("API Call failed: " + str(response.content))
+        raise CustomExceptions.APICallException("API Call failed: " + str(response.content), "a")
     else:
         Logger.debug("Successfully converted to JSON")
         return response.json()
@@ -29,63 +31,114 @@ class BasicSummonerInfo:
     """
 
     def __init__(self, name: str):
-        response, self.api_key = send_summoner_v4(name)
-        self.summoner_name, self.summoner_id, self.summoner_puuid = process_summoner_v4(get_rgapi_json(response))
-        Logger.debug("Got info for " + self.summoner_name)
+        self.summoner_name = name
+        self.info = dict()
+        for key in RequestSender.DICT_OF_KEYS:
+            response = send_summoner_v4(name, key)
+            data = get_rgapi_json(response)
+            self.info[key] = process_summoner_v4(data)
+
+    def get_id(self, key: str):
+        return self.info[key]["id"]
+
+    def get_puuid(self, key: str):
+        return self.info[key]["puuid"]
 
     def __str__(self):
-        return "Name: " + self.summoner_name + ", id: " + self.summoner_id + ", puuid: " + self.summoner_puuid
+        return "Name: " + self.summoner_name
 
 
 class SummonerRankedInfo:
     def __init__(self, bsi: BasicSummonerInfo):
         response = send_league_v4(bsi)
-        self.tier, self.rank, self.lp, self.wins, self.losses, self.veteran, self.inactive, self.freshblood, \
-        self.hotstreak = process_league_v4(get_rgapi_json(response))
+        self.info = process_league_v4(get_rgapi_json(response))
         Logger.debug("got ranked info for " + bsi.summoner_name)
 
+    def is_full(self):
+        return len(self.info.keys()) == 9
 
-class SummonerGameInfo:
+    def __getitem__(self, item):
+        return self.info[item]
+
+    def __contains__(self, item):
+        return item in self.info
+
+
+class SummonerGameBuffer:
     def __init__(self, bsi: BasicSummonerInfo):
+        self.bsi = bsi
         response = get_past_matches(bsi)
         self.matches = response.json()
         Logger.debug("Got " + str(len(self.matches)) + " matches for " + bsi.summoner_name)
+        if len(self.matches) < MATCHES_COUNT:
+            Logger.warning("Only found " + str(len(self.matches)) + " games", sender=bsi.summoner_name)
+
+
+class LeagueGame:
+    def __init__(self, matchid: str, bsi: BasicSummonerInfo):
+        response, self.api_key = get_game_data(matchid)
+        response_json = get_rgapi_json(response)
+        search_id = bsi.get_id(self.api_key)
+        individual_DTO = get_individual_DTO(search_id, response_json)
+
+        # assign basic stuff
+        self.game_time = response_json["info"]["gameDuration"]
+        # position, kda, goldEarned, damage to champions, vision score, cs, dmg to obj,
+        # did game end in surrender for a team, who won, team kills
+        # first blood, herald dragon inhib baron
+        # we need the player's individual json, as well as some team info I guess
+
+
+def get_game_data(matchid: str):
+    key = RequestSender.get_api_key()
+    variables = {"MATCHID": matchid, "API_KEY": key}
+    return RequestSender.send_request(PAST_MATCHES_URL, variables=variables), key
+
+
+def get_individual_DTO(id: str, full_json):
+    for player_data in full_json["info"]["participants"]:
+        if player_data["summonerId"] == id:
+            return player_data
+    raise CustomExceptions.PlayerNotFoundException("Player with id could not be found", "a")
 
 
 def get_past_matches(bsi: BasicSummonerInfo):
-    variables = {"PUUID": bsi.summoner_puuid, "API_KEY": bsi.api_key}
+    key = RequestSender.get_api_key()
+    puuid = bsi.get_puuid(key)
+    variables = {"PUUID": puuid, "API_KEY": key, "COUNT": str(MATCHES_COUNT)}
     return RequestSender.send_request(PAST_MATCHES_URL, variables=variables)
 
 
-def send_summoner_v4(name: str):
+def send_summoner_v4(name: str, api_key: str):
     name = name.replace(" ", "%20")
-    variables = {"SUM_NAME": name, "API_KEY": RequestSender.get_api_key()}
-    return RequestSender.send_request(SUMMONER_V4_URL, variables=variables), variables["API_KEY"]
+    variables = {"SUM_NAME": name, "API_KEY": api_key}
+    return RequestSender.send_request(SUMMONER_V4_URL, variables=variables)
 
 
 def process_summoner_v4(jason):
-    sum_name = jason["name"]
     sum_id = jason["id"]
     sum_puuid = jason["puuid"]
-    return sum_name, sum_id, sum_puuid
+    return {"id": sum_id, "puuid": sum_puuid}
 
 
 def send_league_v4(bsi: BasicSummonerInfo):
-    variables = {"ID": bsi.summoner_id, "API_KEY": bsi.api_key}
+    key = RequestSender.get_api_key()
+    sid = bsi.get_id(key)
+    variables = {"ID": sid, "API_KEY": key}
     return RequestSender.send_request(LEAGUE_V4_URL, variables=variables)
 
 
 def process_league_v4(jason):
+    ret_dict = dict()
     for i in jason:
         if i["queueType"] == "RANKED_SOLO_5x5":
-            ptier = i["tier"]
-            prank = i["rank"]
-            plp = i["leaguePoints"]
-            pwins = i["wins"]
-            plosses = i["losses"]
-            pveteran = i["veteran"]
-            pinative = i["inactive"]
-            pfreshblood = i["freshBlood"]
-            photstreak = i["hotStreak"]
-            return ptier, prank, plp, pwins, plosses, pveteran, pinative, pfreshblood, photstreak
-    return None, None, None, None, None, None, None, None, None
+            ret_dict["tier"] = i["tier"]
+            ret_dict["rank"] = i["rank"]
+            ret_dict["lp"] = i["leaguePoints"]
+            ret_dict["wins"] = i["wins"]
+            ret_dict["losses"] = i["losses"]
+            ret_dict["veteran"] = i["veteran"]
+            ret_dict["inactive"] = i["inactive"]
+            ret_dict["freshblood"] = i["freshBlood"]
+            ret_dict["hotstreak"] = i["hotStreak"]
+    return ret_dict

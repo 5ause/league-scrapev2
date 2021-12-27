@@ -19,3 +19,7 @@ class InstanceExistsException(LoggableException):
 
 class APICallException(LoggableException):
     pass
+
+
+class PlayerNotFoundException(LoggableException):
+    pass

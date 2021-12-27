@@ -8,7 +8,7 @@ import Logger
 
 
 def enter_api_keys():
-    RequestSender.add_keys(["RGAPI-a1094f0e-4833-464e-87ad-a35091fcda83", "RGAPI-4781138d-8763-48f9-b7c9-20f54bf6b059"])
+    RequestSender.add_keys(["RGAPI-a6db298b-6bcc-440b-97c8-651691a2f035", "RGAPI-3df132e3-5c55-4790-960e-9cc5c5f19003"])
 
 
 def test_requests():
@@ -45,10 +45,10 @@ def test_summoner_v4(name):
     Logger.VERBOSITY_LEVEL = "ALL"
     try:
         player = APICollector.BasicSummonerInfo(name)
-        print(player)
+        print(player.info)
         ranked_info = APICollector.SummonerRankedInfo(player)
-        print(ranked_info.rank, ranked_info.tier, ranked_info.lp)
-        matches = APICollector.SummonerGameInfo(player)
+        print(ranked_info["rank"], ranked_info["tier"], ranked_info["lp"])
+        matches = APICollector.SummonerGameBuffer(player)
         print(matches.matches)
     except CustomExceptions.APICallException as e:
         print(e)
