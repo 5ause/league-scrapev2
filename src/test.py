@@ -8,7 +8,7 @@ import Logger
 
 
 def enter_api_keys():
-    RequestSender.add_keys(["RGAPI-a6db298b-6bcc-440b-97c8-651691a2f035", "RGAPI-3df132e3-5c55-4790-960e-9cc5c5f19003"])
+    RequestSender.add_keys(["RGAPI-8da6ea21-bc38-4f30-9eaf-0411a6c4140a"])
 
 
 def test_requests():
@@ -49,7 +49,12 @@ def test_summoner_v4(name):
         ranked_info = APICollector.SummonerRankedInfo(player)
         print(ranked_info["rank"], ranked_info["tier"], ranked_info["lp"])
         matches = APICollector.SummonerGameBuffer(player)
-        print(matches.matches)
+        match = matches.matches[0]
+        game = APICollector.LeagueGame(match, player)
+        print("time: " + str(game.game_time))
+        print("winning team:", game.winning_team)
+        print("team kills:", game.team_kills)
+        print("individual data:", game.individual_data)
     except CustomExceptions.APICallException as e:
         print(e)
 

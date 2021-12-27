@@ -5,9 +5,10 @@ import Logger
 import json
 
 MATCHES_COUNT = 10
+QUEUE_TYPE = "420"
 SUMMONER_V4_URL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/<SUM_NAME>?api_key=<API_KEY>"
 LEAGUE_V4_URL = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/<ID>?api_key=<API_KEY>"
-PAST_MATCHES_URL = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/<PUUID>/ids?queue=420&start=0&count=<COUNT>&api_key=<API_KEY>"
+PAST_MATCHES_URL = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/<PUUID>/ids?queue=" + QUEUE_TYPE + "&start=0&count=<COUNT>&api_key=<API_KEY> "
 MATCH_V5_URL = "https://americas.api.riotgames.com/lol/match/v5/matches/<MATCHID>?api_key=<API_KEY>"
 
 
@@ -83,21 +84,50 @@ class LeagueGame:
 
         # assign basic stuff
         self.game_time = response_json["info"]["gameDuration"]
+
         # position, kda, goldEarned, damage to champions, vision score, cs, dmg to obj,
+        self.individual_data = get_individual_player_data(individual_DTO)
         # did game end in surrender for a team, who won, team kills
-        # first blood, herald dragon inhib baron
-        # we need the player's individual json, as well as some team info I guess
+        self.winning_team = get_winning_team(response_json)
+        self.team_kills = get_team_kills(response_json)
 
 
 def get_game_data(matchid: str):
     key = RequestSender.get_api_key()
     variables = {"MATCHID": matchid, "API_KEY": key}
-    return RequestSender.send_request(PAST_MATCHES_URL, variables=variables), key
+    return RequestSender.send_request(MATCH_V5_URL, variables=variables), key
 
 
-def get_individual_DTO(id: str, full_json):
+def get_individual_player_data(player_json):
+    return {"role": player_json["teamPosition"],
+            "kills": player_json["kills"],
+            "deaths": player_json["deaths"],
+            "assists": player_json["assists"],
+            "goldEarned": player_json["goldEarned"],
+            "damageToChampions": player_json["totalDamageDealtToChampions"],
+            "visionScore": player_json["visionScore"],
+            "creeps": int(player_json["neutralMinionsKilled"]) + int(player_json["totalMinionsKilled"]),
+            "damageToObjectives": player_json["damageDealtToObjectives"],
+            "championName": player_json["championName"]
+            }
+
+
+def get_winning_team(all_json):
+    for team in all_json["info"]["teams"]:
+        if team["win"]:
+            return team["teamId"]
+
+
+def get_team_kills(all_json):
+    ret_dict = dict()
+    for team in all_json["info"]["teams"]:
+        ret_dict[team["teamId"]] = team["objectives"]["champion"]["kills"]
+    return ret_dict
+
+
+def get_individual_DTO(ide: str, full_json):
     for player_data in full_json["info"]["participants"]:
-        if player_data["summonerId"] == id:
+        if player_data["summonerId"] == ide:
             return player_data
     raise CustomExceptions.PlayerNotFoundException("Player with id could not be found", "a")
 
