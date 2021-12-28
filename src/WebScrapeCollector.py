@@ -8,6 +8,7 @@ LOG_URL_1 = "https://www.leagueofgraphs.com/summoner/na/<NAME>"
 LOG_URL_CHAMPIONS = "https://www.leagueofgraphs.com/summoner/champions/na/<NAME>"
 
 
+# SEND A REQUEST
 def get_response(name: str, url):
     name = name.replace(" ", "+")
     variables = {"NAME": name}
@@ -18,6 +19,7 @@ def get_response(name: str, url):
     return soup
 
 
+# IMPORTANT
 def find_role_wr(soup: BeautifulSoup, role):
     role_list = ["Jungler", "Top", "AD Carry", "Mid", "Support"]
     element1 = soup.find("div", attrs={"id": "profileRoles"})
