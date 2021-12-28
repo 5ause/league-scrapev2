@@ -35,6 +35,7 @@ class PlayerData:
 class GameObservation:
     # you enter a game id
     def __init__(self, gameid: str):
+        # TODO make it possible to manually create an AnalysisLeagueGame and initialize this thing.
         # it gets basic game info, like wins, team stuff and shit
         self.game = AnalysisLeagueGame(gameid)
         # teamid: {role: name}

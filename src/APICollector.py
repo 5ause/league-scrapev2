@@ -105,8 +105,15 @@ class AnalysisLeagueGame:
         self.champs = get_team_name_champs(response_json)
         # Get which team won
         self.winning_team = get_winning_team(response_json)
-        # Get team kills, objective info
-        self.team_kills = get_team_kills(response_json)
+
+    def __init__(self, positions, champs):
+        """You can manually create an AnalysisLeagueGame here."""
+        self.api_key = ""
+        # teamid: {role: name}
+        self.positions = positions
+        # name: champ
+        self.champs = champs
+        self.winning_team = None
 
 
 # IMPORTANT

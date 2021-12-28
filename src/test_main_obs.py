@@ -4,6 +4,7 @@ import RequestSender
 import pickle
 import json
 import Logger
+import main
 
 # Logger.VERBOSITY_LEVEL = "VERBOSE"
 RequestSender.add_keys(["RGAPI-6ec2c68c-5e1d-4ffa-821b-4af77abd8231", "RGAPI-36bd4d01-15b2-436d-b3e6-0e17b4f8c924"])
@@ -32,7 +33,8 @@ def get_game_object():
 Logger.VERBOSITY_LEVEL = "VERBOSE"
 obs = get_game_object()
 observation_dict = MainObservation.get_alllll_stats(obs)
-print(json.dumps(observation_dict, sort_keys=False, indent=4))
+flattened_dict = main.flatten_obs_dict(observation_dict)
+print(json.dumps(flattened_dict, sort_keys=False, indent=4))
 
 
 # players = obs.players
