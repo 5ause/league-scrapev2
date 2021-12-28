@@ -58,6 +58,12 @@ class SummonerRankedInfo:
     def __contains__(self, item):
         return item in self.info
 
+    def __str__(self):
+        ret_str = ""
+        for key in self.info:
+            ret_str += key + ": " + str(self.info[key]) + " || "
+        return ret_str
+
 
 class SummonerGameBuffer:
     def __init__(self, bsi: BasicSummonerInfo):
@@ -77,6 +83,7 @@ class HistoryLeagueGame:
         individual_DTO = get_individual_DTO(search_id, response_json)
 
         # assign basic stuff
+        # this is in SECONDS
         self.game_time = response_json["info"]["gameDuration"]
 
         # position, kda, goldEarned, damage to champions, vision score, cs, dmg to obj,
@@ -95,6 +102,7 @@ class AnalysisLeagueGame:
         response_json = get_rgapi_json(response)
         # Get sumname: role
         self.positions = get_team_names_and_positions(response_json)
+        self.champs = get_team_name_champs(response_json)
         # Get which team won
         self.winning_team = get_winning_team(response_json)
         # Get team kills, objective info
@@ -113,6 +121,15 @@ def get_team_names_and_positions(all_json):
         else:
             ret_dict_200[player["teamPosition"]] = player["summonerName"]
     return {"100": ret_dict_100, "200": ret_dict_200}
+
+
+def get_team_name_champs(all_json):
+    # summonerName: champName
+    ret_dict = dict()
+    participants_info = all_json["info"]["participants"]
+    for player in participants_info:
+        ret_dict[player["summonerName"]] = player["championName"]
+    return ret_dict
 
 
 # unused rn
@@ -149,7 +166,8 @@ def get_individual_player_data(player_json):
             "visionScore": player_json["visionScore"],
             "creeps": int(player_json["neutralMinionsKilled"]) + int(player_json["totalMinionsKilled"]),
             "damageToObjectives": player_json["damageDealtToObjectives"],
-            "championName": player_json["championName"]
+            "championName": player_json["championName"],
+            "team": player_json["teamId"]
             }
 
 

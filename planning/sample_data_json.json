@@ -1,0 +1,447 @@
+{
+    "100": {
+        "TOP": {
+            "game_stats": {
+                "avg_game_time": 23.27166666666667,
+                "positions_played": [
+                    "TOP",
+                    "TOP",
+                    "TOP",
+                    "TOP",
+                    "TOP",
+                    "TOP",
+                    "TOP",
+                    "BOTTOM",
+                    "TOP",
+                    "TOP"
+                ],
+                "avg_kda": 2.3441017316017314,
+                "avg_kp": 0.4214827193265268,
+                "avg_vision": 19.9,
+                "avg_cs": 7.399555969347562,
+                "goldpm": 450.255675714388,
+                "dmgpm": 660.584401632887,
+                "dmg_to_obj_pm": 430.5063381794743,
+                "wr": 0.5
+            },
+            "ranked_stats": {
+                "tier": "GRANDMASTER",
+                "rank": "I",
+                "lp": 765,
+                "wins": 98,
+                "losses": 82,
+                "veteran": false,
+                "inactive": false,
+                "freshblood": false,
+                "hotstreak": false
+            },
+            "role_stats": {
+                "role_total_played": "168",
+                "role_wr": "0.55357142857143"
+            },
+            "champ_stats": {
+                "champ_games_played": "4",
+                "champ_winrate": "0.25"
+            }
+        },
+        "JUNGLE": {
+            "game_stats": {
+                "avg_game_time": 23.598333333333333,
+                "positions_played": [
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "MIDDLE"
+                ],
+                "avg_kda": 6.859523809523809,
+                "avg_kp": 0.531200456113896,
+                "avg_vision": 19.2,
+                "avg_cs": 5.322409774701604,
+                "goldpm": 434.6959531040328,
+                "dmgpm": 580.6893142171058,
+                "dmg_to_obj_pm": 773.6563316618406,
+                "wr": 0.5
+            },
+            "ranked_stats": {
+                "tier": "CHALLENGER",
+                "rank": "I",
+                "lp": 1223,
+                "wins": 151,
+                "losses": 91,
+                "veteran": false,
+                "inactive": false,
+                "freshblood": false,
+                "hotstreak": false
+            },
+            "role_stats": {
+                "role_total_played": "268",
+                "role_wr": "0.64925373134328"
+            },
+            "champ_stats": {
+                "champ_games_played": "172",
+                "champ_winrate": "0.72093023255814"
+            }
+        },
+        "MIDDLE": {
+            "game_stats": {
+                "avg_game_time": 25.085,
+                "positions_played": [
+                    "MIDDLE",
+                    "BOTTOM",
+                    "MIDDLE",
+                    "MIDDLE",
+                    "MIDDLE",
+                    "MIDDLE",
+                    "MIDDLE",
+                    "BOTTOM",
+                    "MIDDLE",
+                    "TOP"
+                ],
+                "avg_kda": 2.1144444444444446,
+                "avg_kp": 0.39282725659141104,
+                "avg_vision": 23.7,
+                "avg_cs": 7.103846920470401,
+                "goldpm": 413.5897946980267,
+                "dmgpm": 680.8451265696632,
+                "dmg_to_obj_pm": 270.01793900737493,
+                "wr": 0.5
+            },
+            "ranked_stats": {
+                "tier": "CHALLENGER",
+                "rank": "I",
+                "lp": 896,
+                "wins": 342,
+                "losses": 297,
+                "veteran": true,
+                "inactive": false,
+                "freshblood": false,
+                "hotstreak": false
+            },
+            "role_stats": {
+                "role_total_played": "491",
+                "role_wr": "0.53767820773931"
+            },
+            "champ_stats": {
+                "champ_games_played": "5",
+                "champ_winrate": "0.6"
+            }
+        },
+        "BOTTOM": {
+            "game_stats": {
+                "avg_game_time": 22.581666666666667,
+                "positions_played": [
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY"
+                ],
+                "avg_kda": 4.636593406593407,
+                "avg_kp": 0.5244218033005218,
+                "avg_vision": 47.1,
+                "avg_cs": 0.9520997859620637,
+                "goldpm": 285.93549339434645,
+                "dmgpm": 280.6480183039339,
+                "dmg_to_obj_pm": 67.54594435013654,
+                "wr": 0.4
+            },
+            "ranked_stats": {
+                "tier": "CHALLENGER",
+                "rank": "I",
+                "lp": 1340,
+                "wins": 577,
+                "losses": 519,
+                "veteran": true,
+                "inactive": false,
+                "freshblood": false,
+                "hotstreak": false
+            },
+            "role_stats": {
+                "role_total_played": "32",
+                "role_wr": "0.53125"
+            },
+            "champ_stats": {
+                "champ_games_played": "14",
+                "champ_winrate": "0.64285714285714"
+            }
+        },
+        "UTILITY": {
+            "game_stats": {
+                "avg_game_time": 27.865,
+                "positions_played": [
+                    "UTILITY",
+                    "MIDDLE",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY",
+                    "UTILITY"
+                ],
+                "avg_kda": 2.0994949494949493,
+                "avg_kp": 0.5001313110136639,
+                "avg_vision": 59.2,
+                "avg_cs": 1.6544051677731924,
+                "goldpm": 313.63717925713263,
+                "dmgpm": 592.5856809617801,
+                "dmg_to_obj_pm": 105.93576170823614,
+                "wr": 0.3
+            },
+            "ranked_stats": {
+                "tier": "MASTER",
+                "rank": "I",
+                "lp": 358,
+                "wins": 1832,
+                "losses": 1808,
+                "veteran": false,
+                "inactive": false,
+                "freshblood": true,
+                "hotstreak": false
+            },
+            "role_stats": {
+                "role_total_played": "1946",
+                "role_wr": "0.51130524152107"
+            },
+            "champ_stats": {
+                "champ_games_played": "3330",
+                "champ_winrate": "0.50720720720721"
+            }
+        }
+    },
+    "200": {
+        "TOP": {
+            "game_stats": {
+                "avg_game_time": 24.183333333333334,
+                "positions_played": [
+                    "TOP",
+                    "TOP",
+                    "TOP",
+                    "TOP",
+                    "TOP",
+                    "TOP",
+                    "TOP",
+                    "TOP",
+                    "TOP",
+                    "TOP"
+                ],
+                "avg_kda": 1.9093849206349205,
+                "avg_kp": 0.3709532297767592,
+                "avg_vision": 16.5,
+                "avg_cs": 6.822880771881461,
+                "goldpm": 425.8718125430737,
+                "dmgpm": 689.4169538249483,
+                "dmg_to_obj_pm": 228.99241902136455,
+                "wr": 0.4
+            },
+            "ranked_stats": {
+                "tier": "CHALLENGER",
+                "rank": "I",
+                "lp": 1048,
+                "wins": 719,
+                "losses": 665,
+                "veteran": true,
+                "inactive": false,
+                "freshblood": false,
+                "hotstreak": false
+            },
+            "role_stats": {
+                "role_total_played": "1130",
+                "role_wr": "0.5353982300885"
+            },
+            "champ_stats": {
+                "champ_games_played": "149",
+                "champ_winrate": "0.59060402684564"
+            }
+        },
+        "JUNGLE": {
+            "game_stats": {
+                "avg_game_time": 26.375,
+                "positions_played": [
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "TOP"
+                ],
+                "avg_kda": 6.762929292929293,
+                "avg_kp": 0.6123594642072903,
+                "avg_vision": 27.5,
+                "avg_cs": 7.237914691943128,
+                "goldpm": 483.6436018957346,
+                "dmgpm": 751.2872037914692,
+                "dmg_to_obj_pm": 883.6398104265403,
+                "wr": 0.5
+            },
+            "ranked_stats": {
+                "tier": "GRANDMASTER",
+                "rank": "I",
+                "lp": 696,
+                "wins": 302,
+                "losses": 280,
+                "veteran": true,
+                "inactive": false,
+                "freshblood": false,
+                "hotstreak": false
+            },
+            "role_stats": {
+                "role_total_played": "481",
+                "role_wr": "0.54469854469854"
+            },
+            "champ_stats": {
+                "champ_games_played": "30",
+                "champ_winrate": "0.53333333333333"
+            }
+        },
+        "MIDDLE": {
+            "game_stats": {
+                "avg_game_time": 25.243333333333332,
+                "positions_played": [
+                    "MIDDLE",
+                    "MIDDLE",
+                    "MIDDLE",
+                    "MIDDLE",
+                    "TOP",
+                    "UTILITY",
+                    "MIDDLE",
+                    "MIDDLE",
+                    "MIDDLE",
+                    "MIDDLE"
+                ],
+                "avg_kda": 3.2574603174603176,
+                "avg_kp": 0.4178930803315478,
+                "avg_vision": 23.9,
+                "avg_cs": 7.023636603723755,
+                "goldpm": 428.3863726396408,
+                "dmgpm": 612.3953519080945,
+                "dmg_to_obj_pm": 248.81420837184734,
+                "wr": 0.6
+            },
+            "ranked_stats": {
+                "tier": "CHALLENGER",
+                "rank": "I",
+                "lp": 1433,
+                "wins": 173,
+                "losses": 112,
+                "veteran": true,
+                "inactive": false,
+                "freshblood": false,
+                "hotstreak": false
+            },
+            "role_stats": {
+                "role_total_played": "199",
+                "role_wr": "0.63819095477387"
+            },
+            "champ_stats": {
+                "champ_games_played": "27",
+                "champ_winrate": "0.51851851851852"
+            }
+        },
+        "BOTTOM": {
+            "game_stats": {
+                "avg_game_time": 26.916666666666668,
+                "positions_played": [
+                    "BOTTOM",
+                    "MIDDLE",
+                    "MIDDLE",
+                    "MIDDLE",
+                    "MIDDLE",
+                    "BOTTOM",
+                    "BOTTOM",
+                    "BOTTOM",
+                    "BOTTOM",
+                    "MIDDLE"
+                ],
+                "avg_kda": 3.8461904761904764,
+                "avg_kp": 0.3888992248062016,
+                "avg_vision": 22.1,
+                "avg_cs": 7.173993808049535,
+                "goldpm": 444.01857585139317,
+                "dmgpm": 727.8167182662538,
+                "dmg_to_obj_pm": 317.0080495356037,
+                "wr": 0.8
+            },
+            "ranked_stats": {
+                "tier": "GRANDMASTER",
+                "rank": "I",
+                "lp": 852,
+                "wins": 397,
+                "losses": 356,
+                "veteran": true,
+                "inactive": false,
+                "freshblood": false,
+                "hotstreak": false
+            },
+            "role_stats": {
+                "role_total_played": "202",
+                "role_wr": "0.53960396039604"
+            },
+            "champ_stats": {
+                "champ_games_played": "36",
+                "champ_winrate": "0.55555555555556"
+            }
+        },
+        "UTILITY": {
+            "game_stats": {
+                "avg_game_time": 26.310000000000002,
+                "positions_played": [
+                    "BOTTOM",
+                    "BOTTOM",
+                    "BOTTOM",
+                    "UTILITY",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "JUNGLE",
+                    "BOTTOM",
+                    "UTILITY",
+                    "BOTTOM"
+                ],
+                "avg_kda": 3.0040043290043292,
+                "avg_kp": 0.40794476842533933,
+                "avg_vision": 36.6,
+                "avg_cs": 5.039908779931585,
+                "goldpm": 372.59597111364496,
+                "dmgpm": 467.76130748764723,
+                "dmg_to_obj_pm": 324.3709616115545,
+                "wr": 0.3
+            },
+            "ranked_stats": {
+                "tier": "GRANDMASTER",
+                "rank": "I",
+                "lp": 809,
+                "wins": 418,
+                "losses": 389,
+                "veteran": false,
+                "inactive": false,
+                "freshblood": false,
+                "hotstreak": false
+            },
+            "role_stats": {
+                "role_total_played": "616",
+                "role_wr": "0.52435064935065"
+            },
+            "champ_stats": {
+                "champ_games_played": "25",
+                "champ_winrate": "0.36"
+            }
+        }
+    },
+    "winning_team": 200
+}

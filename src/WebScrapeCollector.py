@@ -90,6 +90,7 @@ def get_name_match_score(input_name: str, compare_to_name: str):
 
 # IMPORTANT
 def get_champ_wr_played(soup: BeautifulSoup, champion_name: str):
+    # {'gamesPlayed': '172', 'winrate': '0.72093023255814', 'champion': 'Lee Sin'}
     datas = get_champ_datas(soup)
     for key in datas:
         if get_name_match_score(champion_name, key) > 0.99:

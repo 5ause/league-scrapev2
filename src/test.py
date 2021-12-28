@@ -138,8 +138,8 @@ enter_api_keys()
 # test_summoner_v4("PlatypusOfCanada")
 # test_summoner_v4("waste it on me")
 
-# test_get_champ_infos("waste it on me")
+test_get_champ_infos("waste it on me", "Lee Sin")
 # test_get_champ_infos("Sudden Stirke", "master yi")
 games = ['NA1_4152493334', 'NA1_4144890019', 'NA1_4144645173', 'NA1_4144616999', 'NA1_4144601202', 'NA1_4142425411', 'NA1_4142319290', 'NA1_4142276540', 'NA1_4142225392', 'NA1_4142220426']
 # get_some_games("waste it on me")
-test_get_roles('NA1_4144890019')
+# test_get_roles('NA1_4144890019')
