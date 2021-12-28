@@ -7,10 +7,11 @@ import APICollector
 import CustomExceptions
 import Logger
 import WebScrapeCollector
+import RoleIdentifier
 
 
 def enter_api_keys():
-    RequestSender.add_keys(["RGAPI-8da6ea21-bc38-4f30-9eaf-0411a6c4140a"])
+    RequestSender.add_keys(["RGAPI-6ec2c68c-5e1d-4ffa-821b-4af77abd8231"])
 
 
 def test_requests():
@@ -52,7 +53,7 @@ def test_summoner_v4(name):
         print(ranked_info["rank"], ranked_info["tier"], ranked_info["lp"])
         matches = APICollector.SummonerGameBuffer(player)
         match = matches.matches[0]
-        game = APICollector.LeagueGame(match, player)
+        game = APICollector.HistoryLeagueGame(match, player)
         print("time: " + str(game.game_time))
         print("winning team:", game.winning_team)
         print("team kills:", game.team_kills)
@@ -118,9 +119,27 @@ def test_champ_compare_score2():
         pass
 
 
-# enter_api_keys()
+def get_some_games(sumname):
+    bsi = APICollector.BasicSummonerInfo(sumname)
+    games = APICollector.SummonerGameBuffer(bsi)
+    print(games.matches)
+
+
+def test_get_roles(matchid):
+    all_json = APICollector.get_game_data(matchid)[0]
+    all_json = APICollector.get_rgapi_json(all_json)
+    position_dict = APICollector.get_team_names_and_positions(all_json)
+    for team in position_dict:
+        print(team, "\n")
+        print(position_dict[team])
+
+
+enter_api_keys()
 # test_summoner_v4("PlatypusOfCanada")
 # test_summoner_v4("waste it on me")
 
 # test_get_champ_infos("waste it on me")
-test_get_champ_infos("Sudden Stirke", "master yi")
+# test_get_champ_infos("Sudden Stirke", "master yi")
+games = ['NA1_4152493334', 'NA1_4144890019', 'NA1_4144645173', 'NA1_4144616999', 'NA1_4144601202', 'NA1_4142425411', 'NA1_4142319290', 'NA1_4142276540', 'NA1_4142225392', 'NA1_4142220426']
+# get_some_games("waste it on me")
+test_get_roles('NA1_4144890019')

@@ -1,13 +1,13 @@
 class LoggableException(Exception):
-    def __init__(self, msg="", type=""):
+    def __init__(self, msg="", thype=""):
         super().__init__(msg)
-        if type in ["alert", "warning", "msg"]:
-            self.type = type
-        elif type == "a":
+        if thype in ["alert", "warning", "msg"]:
+            self.type = thype
+        elif thype == "a":
             self.type = "alert"
-        elif type == "w":
+        elif thype == "w":
             self.type = "warning"
-        elif type == "m":
+        elif thype == "m":
             self.type = "msg"
         else:
             self.type = "msg"
@@ -22,4 +22,8 @@ class APICallException(LoggableException):
 
 
 class PlayerNotFoundException(LoggableException):
+    pass
+
+
+class InputException(LoggableException):
     pass

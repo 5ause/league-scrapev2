@@ -2,7 +2,6 @@ import requests
 import CustomExceptions
 import RequestSender
 import Logger
-import json
 
 MATCHES_COUNT = 10
 QUEUE_TYPE = "420"
@@ -12,20 +11,15 @@ PAST_MATCHES_URL = "https://americas.api.riotgames.com/lol/match/v5/matches/by-p
 MATCH_V5_URL = "https://americas.api.riotgames.com/lol/match/v5/matches/<MATCHID>?api_key=<API_KEY>"
 
 
-# TODO make a function that calls the riot api, returns a dict or an error
 def get_rgapi_json(response: requests.Response):
     if response.status_code == 403:
         raise CustomExceptions.APICallException("No API KEY probably", "a")
     elif not response.ok:
         raise CustomExceptions.APICallException("API Call failed: " + str(response.content), "a")
     else:
-        Logger.debug("Successfully converted to JSON")
         return response.json()
 
 
-# TODO make a function that makes an object of name id puuid from the summoner v4 data
-
-# TODO make a summoner_v4 object that processes the league_v4 stuff
 class BasicSummonerInfo:
     """
     This collects data
@@ -75,7 +69,7 @@ class SummonerGameBuffer:
             Logger.warning("Only found " + str(len(self.matches)) + " games", sender=bsi.summoner_name)
 
 
-class LeagueGame:
+class HistoryLeagueGame:
     def __init__(self, matchid: str, bsi: BasicSummonerInfo):
         response, self.api_key = get_game_data(matchid)
         response_json = get_rgapi_json(response)
@@ -90,6 +84,53 @@ class LeagueGame:
         # did game end in surrender for a team, who won, team kills
         self.winning_team = get_winning_team(response_json)
         self.team_kills = get_team_kills(response_json)
+        self.champions_played = get_team_champions(response_json)
+        self.champion_dict = get_team_champion_names(response_json)
+        Logger.debug("Got match " + matchid + " using key " + self.api_key)
+
+
+class AnalysisLeagueGame:
+    def __init__(self, matchid: str):
+        response, self.api_key = get_game_data(matchid)
+        response_json = get_rgapi_json(response)
+        # Get sumname: role
+        self.positions = get_team_names_and_positions(response_json)
+        # Get which team won
+        self.winning_team = get_winning_team(response_json)
+        # Get team kills, objective info
+        self.team_kills = get_team_kills(response_json)
+
+
+# IMPORTANT
+def get_team_names_and_positions(all_json):
+    # teamid: {role: name}
+    ret_dict_100 = dict()
+    ret_dict_200 = dict()
+    participants_info = all_json["info"]["participants"]
+    for player in participants_info:
+        if player["teamId"] == 100:
+            ret_dict_100[player["teamPosition"]] = player["summonerName"]
+        else:
+            ret_dict_200[player["teamPosition"]] = player["summonerName"]
+    return {"100": ret_dict_100, "200": ret_dict_200}
+
+
+# unused rn
+def get_team_champions(all_json):
+    ret_dict = {"100": [], "200": []}
+    participants_info = all_json["info"]["participants"]
+    for player in participants_info:
+        ret_dict[str(player["teamId"])].append(player["championId"])
+    return ret_dict
+
+
+# unused rn
+def get_team_champion_names(all_json):
+    ret_dict = dict()
+    participants_info = all_json["info"]["participants"]
+    for player in participants_info:
+        ret_dict[player["championId"]] = player["championName"]
+    return ret_dict
 
 
 def get_game_data(matchid: str):

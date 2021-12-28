@@ -21,24 +21,29 @@ def send_request(url: str, variables=dict(), headers=dict(), method="GET") -> re
     # send the req
     if method == "GET":
         response = requests.get(url=url, headers=headers)
-        Logger.verbose("sending GET to " + url)
+        # Logger.verbose("sending GET to " + url)
     else:
         response = requests.post(url=url, headers=headers)
-        Logger.verbose("sending POST to " + url)
+        # Logger.verbose("sending POST to " + url)
     return response
 
 
 def process_url(url, variables):
     if "<API_KEY>" in url and "API_KEY" not in variables:
-        url = url.replace("<API_KEY>", get_api_key())
+        key = get_api_key()
+        url = url.replace("<API_KEY>", key)
+        DICT_OF_KEYS[key] = round(time.time(), 1)
     if "<API_KEY>" in url and "API_KEY" in variables:
-        url = url.replace("<API_KEY>", get_api_key(variables["API_KEY"]))
+        key = get_api_key(variables["API_KEY"])
+        url = url.replace("<API_KEY>", key)
+        DICT_OF_KEYS[key] = round(time.time(), 1)
     for key in variables:
         url = url.replace("<" + key + ">", variables[key])
     return url
 
 
 def get_api_key(api_key=None) -> str:
+    Logger.verbose("get_api_key_called")
     time_between_reqs = 1.2
     # int(time.time()) is in seconds ok
     # find the least recent key
@@ -57,8 +62,8 @@ def get_api_key(api_key=None) -> str:
     # Wait the appropriate amount of time
     time_now = round(time.time(), 1)
     if time_now - recent < time_between_reqs:
+        Logger.verbose("about to sleep " + str(time_between_reqs - (time_now - recent)))
         time.sleep(time_between_reqs - (time_now - recent))
 
     # change the api key's last usage time to current time
-    DICT_OF_KEYS[api_key] = round(time.time(), 1)
     return api_key
