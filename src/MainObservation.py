@@ -105,8 +105,11 @@ def get_game_stats(pd: PlayerData):
             total_wins += 1
 
     total_minutes = total_time / 60
+    position_str = ""
+    for position in positions:
+        position_str += position + " "
     ret_dict = {"avg_game_time": total_minutes / total_games,
-                "positions_played": positions,
+                "positions_played": position_str.strip(),
                 "avg_kda": total_kda / total_games,
                 "avg_kp": total_kp / total_games,
                 "avg_vision": total_vision_score / total_games,
@@ -186,3 +189,7 @@ def get_alllll_stats(go: GameObservation):
         teams[team] = role_dict
         # teamid: {roleid: {game_stats, etc.}}
     return teams
+
+# to flatten, we probably just append team id and position name to every variable.
+# then we put together game_stats, ranked_stats, role_stats, champ_stats
+# so we'll end up with like 100_UTILITY_lp for example

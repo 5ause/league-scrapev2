@@ -3,18 +3,7 @@
         "TOP": {
             "game_stats": {
                 "avg_game_time": 23.27166666666667,
-                "positions_played": [
-                    "TOP",
-                    "TOP",
-                    "TOP",
-                    "TOP",
-                    "TOP",
-                    "TOP",
-                    "TOP",
-                    "BOTTOM",
-                    "TOP",
-                    "TOP"
-                ],
+                "positions_played": "TOP TOP TOP TOP TOP TOP TOP BOTTOM TOP TOP",
                 "avg_kda": 2.3441017316017314,
                 "avg_kp": 0.4214827193265268,
                 "avg_vision": 19.9,
@@ -47,18 +36,7 @@
         "JUNGLE": {
             "game_stats": {
                 "avg_game_time": 23.598333333333333,
-                "positions_played": [
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "MIDDLE"
-                ],
+                "positions_played": "JUNGLE JUNGLE JUNGLE JUNGLE JUNGLE JUNGLE JUNGLE JUNGLE JUNGLE MIDDLE",
                 "avg_kda": 6.859523809523809,
                 "avg_kp": 0.531200456113896,
                 "avg_vision": 19.2,
@@ -91,18 +69,7 @@
         "MIDDLE": {
             "game_stats": {
                 "avg_game_time": 25.085,
-                "positions_played": [
-                    "MIDDLE",
-                    "BOTTOM",
-                    "MIDDLE",
-                    "MIDDLE",
-                    "MIDDLE",
-                    "MIDDLE",
-                    "MIDDLE",
-                    "BOTTOM",
-                    "MIDDLE",
-                    "TOP"
-                ],
+                "positions_played": "MIDDLE BOTTOM MIDDLE MIDDLE MIDDLE MIDDLE MIDDLE BOTTOM MIDDLE TOP",
                 "avg_kda": 2.1144444444444446,
                 "avg_kp": 0.39282725659141104,
                 "avg_vision": 23.7,
@@ -135,18 +102,7 @@
         "BOTTOM": {
             "game_stats": {
                 "avg_game_time": 22.581666666666667,
-                "positions_played": [
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY"
-                ],
+                "positions_played": "UTILITY UTILITY UTILITY UTILITY UTILITY UTILITY UTILITY UTILITY UTILITY UTILITY",
                 "avg_kda": 4.636593406593407,
                 "avg_kp": 0.5244218033005218,
                 "avg_vision": 47.1,
@@ -179,18 +135,7 @@
         "UTILITY": {
             "game_stats": {
                 "avg_game_time": 27.865,
-                "positions_played": [
-                    "UTILITY",
-                    "MIDDLE",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY",
-                    "UTILITY"
-                ],
+                "positions_played": "UTILITY MIDDLE UTILITY UTILITY UTILITY UTILITY UTILITY UTILITY UTILITY UTILITY",
                 "avg_kda": 2.0994949494949493,
                 "avg_kp": 0.5001313110136639,
                 "avg_vision": 59.2,
@@ -212,12 +157,12 @@
                 "hotstreak": false
             },
             "role_stats": {
-                "role_total_played": "1946",
-                "role_wr": "0.51130524152107"
+                "role_total_played": "1947",
+                "role_wr": "0.5115562403698"
             },
             "champ_stats": {
-                "champ_games_played": "3330",
-                "champ_winrate": "0.50720720720721"
+                "champ_games_played": "3331",
+                "champ_winrate": "0.50735514860402"
             }
         }
     },
@@ -225,18 +170,7 @@
         "TOP": {
             "game_stats": {
                 "avg_game_time": 24.183333333333334,
-                "positions_played": [
-                    "TOP",
-                    "TOP",
-                    "TOP",
-                    "TOP",
-                    "TOP",
-                    "TOP",
-                    "TOP",
-                    "TOP",
-                    "TOP",
-                    "TOP"
-                ],
+                "positions_played": "TOP TOP TOP TOP TOP TOP TOP TOP TOP TOP",
                 "avg_kda": 1.9093849206349205,
                 "avg_kp": 0.3709532297767592,
                 "avg_vision": 16.5,
@@ -269,18 +203,7 @@
         "JUNGLE": {
             "game_stats": {
                 "avg_game_time": 26.375,
-                "positions_played": [
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "TOP"
-                ],
+                "positions_played": "JUNGLE JUNGLE JUNGLE JUNGLE JUNGLE JUNGLE JUNGLE JUNGLE JUNGLE TOP",
                 "avg_kda": 6.762929292929293,
                 "avg_kp": 0.6123594642072903,
                 "avg_vision": 27.5,
@@ -313,18 +236,7 @@
         "MIDDLE": {
             "game_stats": {
                 "avg_game_time": 25.243333333333332,
-                "positions_played": [
-                    "MIDDLE",
-                    "MIDDLE",
-                    "MIDDLE",
-                    "MIDDLE",
-                    "TOP",
-                    "UTILITY",
-                    "MIDDLE",
-                    "MIDDLE",
-                    "MIDDLE",
-                    "MIDDLE"
-                ],
+                "positions_played": "MIDDLE MIDDLE MIDDLE MIDDLE TOP UTILITY MIDDLE MIDDLE MIDDLE MIDDLE",
                 "avg_kda": 3.2574603174603176,
                 "avg_kp": 0.4178930803315478,
                 "avg_vision": 23.9,
@@ -357,18 +269,7 @@
         "BOTTOM": {
             "game_stats": {
                 "avg_game_time": 26.916666666666668,
-                "positions_played": [
-                    "BOTTOM",
-                    "MIDDLE",
-                    "MIDDLE",
-                    "MIDDLE",
-                    "MIDDLE",
-                    "BOTTOM",
-                    "BOTTOM",
-                    "BOTTOM",
-                    "BOTTOM",
-                    "MIDDLE"
-                ],
+                "positions_played": "BOTTOM MIDDLE MIDDLE MIDDLE MIDDLE BOTTOM BOTTOM BOTTOM BOTTOM MIDDLE",
                 "avg_kda": 3.8461904761904764,
                 "avg_kp": 0.3888992248062016,
                 "avg_vision": 22.1,
@@ -401,18 +302,7 @@
         "UTILITY": {
             "game_stats": {
                 "avg_game_time": 26.310000000000002,
-                "positions_played": [
-                    "BOTTOM",
-                    "BOTTOM",
-                    "BOTTOM",
-                    "UTILITY",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "JUNGLE",
-                    "BOTTOM",
-                    "UTILITY",
-                    "BOTTOM"
-                ],
+                "positions_played": "BOTTOM BOTTOM BOTTOM UTILITY JUNGLE JUNGLE JUNGLE BOTTOM UTILITY BOTTOM",
                 "avg_kda": 3.0040043290043292,
                 "avg_kp": 0.40794476842533933,
                 "avg_vision": 36.6,
