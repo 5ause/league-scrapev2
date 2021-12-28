@@ -1,10 +1,12 @@
 import requests
+import random
 
 import RequestSender
 import time
 import APICollector
 import CustomExceptions
 import Logger
+import WebScrapeCollector
 
 
 def enter_api_keys():
@@ -59,15 +61,66 @@ def test_summoner_v4(name):
         print(e)
 
 
-enter_api_keys()
-# test_summoner_v4("PlatypusOfCanada")
-test_summoner_v4("waste it on me")
+def test_get_log(name):
+    try:
+        soup = WebScrapeCollector.get_response(name, WebScrapeCollector.LOG_URL_CHAMPIONS)
+        with open("output2.html", "wb") as file:
+            file.write(soup.prettify("utf-8"))
+    except Exception as e:
+        print(e)
+
+
+def test_get_infos(name):
+    try:
+        soup = WebScrapeCollector.get_response(name, WebScrapeCollector.LOG_URL_1)
+
+        print(WebScrapeCollector.find_role_wr(soup, "Jungler"))
+    except Exception as e:
+        print(e)
+
+
+def test_get_champ_infos(name):
+    try:
+        soup = WebScrapeCollector.get_response(name, WebScrapeCollector.LOG_URL_CHAMPIONS)
+        champ_dict = WebScrapeCollector.get_champ_datas(soup)
+        for key in champ_dict:
+            print(key, champ_dict[key])
+    except Exception as e:
+        print(e)
+
+
+def test_get_champ_infos(name, champion_name):
+    soup = WebScrapeCollector.get_response(name, WebScrapeCollector.LOG_URL_CHAMPIONS)
+    print(WebScrapeCollector.get_champ_wr_played(soup, champion_name))
+
+
+def test_champ_compare_score():
+    champ1 = input("champ input: ")
+    champ2 = input("champ to compare to(on LOG): ")
+    print(WebScrapeCollector.get_name_match_score(champ1, champ2))
+
+
+def test_champ_compare_score2():
+    jason = requests.get("http://ddragon.leagueoflegends.com/cdn/9.3.1/data/en_US/champion.json")
+    champ_data = jason.json()["data"]
+    random1 = random.randint(0, len(champ_data) - 1)
+    random2 = random.randint(0, len(champ_data) - 1)
+    champ1 = list(champ_data.keys())[random1]
+    champ2 = list(champ_data.keys())[random2]
+    score = WebScrapeCollector.get_name_match_score(champ1, champ2)
+    if score > 0.99:
+        Logger.message(champ1 + " equals " + champ2)
+    elif score > 0.5:
+        Logger.warning(champ1 + " match score " + str(score) + " with " + champ2)
+    elif score > 0:
+        Logger.alert(champ1 + " match score " + str(score) + " with " + champ2)
+    else:
+        pass
+
 
 # enter_api_keys()
-# for i in range(0, 3):
-#     response = RequestSender.send_request(
-#         "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/PlatypusOfCanada?api_key=<API_KEY>")
-#     print(response.json())
-    # TODO IT TURNS OUT YOU NEED 1 API KEY FOR EACH INDIVIDUAL SUMMONER BRUHHH
-    # for get_api_key maybe do request a specific key or something and let it auto sleep for u like overload the method
-    # to get_api_key(key) or something
+# test_summoner_v4("PlatypusOfCanada")
+# test_summoner_v4("waste it on me")
+
+# test_get_champ_infos("waste it on me")
+test_get_champ_infos("Sudden Stirke", "master yi")
