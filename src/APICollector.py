@@ -97,23 +97,29 @@ class HistoryLeagueGame:
 
 
 class AnalysisLeagueGame:
-    def __init__(self, matchid: str):
-        response, self.api_key = get_game_data(matchid)
-        response_json = get_rgapi_json(response)
+    def __init__(self, api_key, positions, champs, winning_team):
+        self.api_key = api_key
         # Get sumname: role
-        self.positions = get_team_names_and_positions(response_json)
-        self.champs = get_team_name_champs(response_json)
-        # Get which team won
-        self.winning_team = get_winning_team(response_json)
-
-    def __init__(self, positions, champs):
-        """You can manually create an AnalysisLeagueGame here."""
-        self.api_key = ""
-        # teamid: {role: name}
         self.positions = positions
-        # name: champ
         self.champs = champs
-        self.winning_team = None
+        # Get which team won
+        self.winning_team = winning_team
+
+    @classmethod
+    def api_init(cls, matchid):
+        """You can manually create an AnalysisLeagueGame here."""
+        response, api_key = get_game_data(matchid)
+        response_json = get_rgapi_json(response)
+        positions = get_team_names_and_positions(response_json)
+        champs = get_team_name_champs(response_json)
+        winning_team = get_winning_team(response_json)
+        return cls(api_key, positions, champs, winning_team)
+
+        # # teamid: {role: name}
+        # self.positions = positions
+        # # name: champ
+        # self.champs = champs
+        # self.winning_team = None
 
 
 # IMPORTANT

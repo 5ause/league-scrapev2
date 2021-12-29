@@ -37,7 +37,7 @@ class GameObservation:
     def __init__(self, gameid: str):
         # TODO make it possible to manually create an AnalysisLeagueGame and initialize this thing.
         # it gets basic game info, like wins, team stuff and shit
-        self.game = AnalysisLeagueGame(gameid)
+        self.game = AnalysisLeagueGame.api_init(gameid)
         # teamid: {role: name}
         team_100_players = self.game.positions["100"].copy()
         team_200_players = self.game.positions["200"].copy()

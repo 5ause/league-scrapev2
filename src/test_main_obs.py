@@ -30,12 +30,15 @@ def get_game_object():
     return obs
 
 
-Logger.VERBOSITY_LEVEL = "VERBOSE"
-obs = get_game_object()
-observation_dict = MainObservation.get_alllll_stats(obs)
-flattened_dict = main.flatten_obs_dict(observation_dict)
-print(json.dumps(flattened_dict, sort_keys=False, indent=4))
+# Logger.VERBOSITY_LEVEL = "VERBOSE"
+# obs = get_game_object()
+# observation_dict = MainObservation.get_alllll_stats(obs)
+# flattened_dict = main.flatten_obs_dict(observation_dict)
+# print(json.dumps(flattened_dict, sort_keys=False, indent=4))
 
+observation1 = main.get_observation('NA1_4144890019')
+main.write_observation(observation1)
+print(json.dumps(observation1, sort_keys=False, indent=4))
 
 # players = obs.players
 # print(players)
