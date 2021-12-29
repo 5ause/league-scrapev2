@@ -97,7 +97,7 @@ def get_champ_wr_played(soup: BeautifulSoup, champion_name: str):
             champ_data = datas[key]
             champ_data["champion"] = key
             return champ_data
-    return None
+    return {'gamesPlayed': 0, 'winrate': None, "champion": champion_name}
 
 
 # Semi-important HELPER
