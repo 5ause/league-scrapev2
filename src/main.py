@@ -1,5 +1,6 @@
 from typing import Dict
 from queue import Queue
+import traceback
 
 import Logger
 import csv
@@ -146,6 +147,9 @@ def add_keys_with_offset(main_dict, other_dict, offset=""):
 
 def main():
     API_KEYS = ["RGAPI-6ec2c68c-5e1d-4ffa-821b-4af77abd8231", "RGAPI-36bd4d01-15b2-436d-b3e6-0e17b4f8c924"]
+    Logger.VERBOSITY_LEVEL = "ALL"
+    TARGET_OBS = int(input("target # of observations: "))
+
     RequestSender.add_keys(API_KEYS)
 
     SEEN = get_seen()
@@ -155,8 +159,6 @@ def main():
     GAMES = get_games()  # queue
     Logger.message("Got game queue...")
 
-    # get target # of observations
-    TARGET_OBS = int(input("target # of observations: "))
     games_processed = 0
     errors = {"seen": 0, "bad_player": 0, "other": []}
     while games_processed < TARGET_OBS:
@@ -176,6 +178,9 @@ def main():
             add_bad_summoner(e.name)
             bad_summoners.append(e.name)
             errors["bad_player"] += 1
+        except TypeError as e:
+            print(traceback.format_exc())
+            Logger.alert("halted data collection for " + gameid + ". Message: " + str(e), str(type(e)))
         except Exception as e:
             Logger.alert("halted data collection for " + gameid + ". Message: " + str(e), str(type(e)))
             errors["other"].append(str(e))

@@ -148,9 +148,11 @@ def get_champ_stats(sum_name, champ_name):
     soup = WebScrapeCollector.get_response(sum_name, WebScrapeCollector.LOG_URL_CHAMPIONS)
     champ_play_wr = WebScrapeCollector.get_champ_wr_played(soup, champ_name)
     # {'gamesPlayed': '172', 'winrate': '0.72093023255814', 'champion': 'Lee Sin'} or None
-    if champ_play_wr is not None:
+    if champ_play_wr is not None and "gamesPlayed" in champ_play_wr and "winrate" in champ_play_wr:
         games_played = champ_play_wr["gamesPlayed"]
         winrate = champ_play_wr["winrate"]
+    else:
+        Logger.warning("Couldn't find champ info for " + sum_name + "(" + champ_name + ")")
     return {"champ_games_played": games_played, "champ_winrate": winrate}
 
 
@@ -163,7 +165,14 @@ def get_role_stats(sum_name, role_name):
 
     # {"role": role, "played": wr_dict[role][1], "winrate": wr_dict[role][2]}
     response_dict = WebScrapeCollector.find_role_wr(soup, role_dict[role_name])
-    return {"role_total_played": response_dict["played"], "role_wr": response_dict["winrate"]}
+    played = None
+    winrate = None
+    if response_dict is not None and "played" in response_dict and "winrate" in response_dict:
+        played = response_dict["played"]
+        winrate = response_dict["winrate"]
+    else:
+        Logger.warning("Couldn't find role info for " + sum_name)
+    return {"role_total_played": played, "role_wr": winrate}
 
 
 # I want {teamId: {roleId: allData}}
