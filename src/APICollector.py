@@ -102,6 +102,7 @@ class AnalysisLeagueGame:
         # Get sumname: role
         self.positions = positions
         self.champs = champs
+        self.players = list(champs.keys())
         # Get which team won
         self.winning_team = winning_team
 

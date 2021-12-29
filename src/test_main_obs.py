@@ -36,9 +36,11 @@ def get_game_object():
 # flattened_dict = main.flatten_obs_dict(observation_dict)
 # print(json.dumps(flattened_dict, sort_keys=False, indent=4))
 
-observation1 = main.get_observation('NA1_4144890019')
-main.write_observation(observation1)
-print(json.dumps(observation1, sort_keys=False, indent=4))
+# observation1 = main.get_observation('NA1_4144890019')
+# main.write_observation(observation1)
+# print(json.dumps(observation1, sort_keys=False, indent=4))
+
+print(main.get_seen())
 
 # players = obs.players
 # print(players)

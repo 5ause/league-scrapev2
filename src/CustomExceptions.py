@@ -27,3 +27,9 @@ class PlayerNotFoundException(LoggableException):
 
 class InputException(LoggableException):
     pass
+
+
+class SummonerException(LoggableException):
+    def __init__(self, sum_name, msg="", thype=""):
+        super().__init__(msg, thype)
+        self.name = sum_name

@@ -9,14 +9,19 @@ import Logger
 
 
 def create_player(summoner_name: str):
-    bsi = BasicSummonerInfo(summoner_name)
-    ranked_info = SummonerRankedInfo(bsi).info
-    games_to_investigate = SummonerGameBuffer(bsi)
-    games = []
-    for matchid in games_to_investigate.matches:
-        games.append(HistoryLeagueGame(matchid, bsi))
-    Logger.message("got info", summoner_name)
-    return PlayerData(bsi, ranked_info, games)
+    try:
+        Logger.debug("Attempting to get info", summoner_name)
+        bsi = BasicSummonerInfo(summoner_name)
+        ranked_info = SummonerRankedInfo(bsi).info
+        games_to_investigate = SummonerGameBuffer(bsi)
+        games = []
+        for matchid in games_to_investigate.matches:
+            games.append(HistoryLeagueGame(matchid, bsi))
+        Logger.message("got info", summoner_name)
+        return PlayerData(bsi, ranked_info, games)
+    except Exception:
+        raise CustomExceptions.SummonerException(summoner_name, msg="Couldn't Process Summoner", thype="a")
+        print("hello")
 
 
 class PlayerData:
@@ -34,10 +39,13 @@ class PlayerData:
 
 class GameObservation:
     # you enter a game id
-    def __init__(self, gameid: str):
+    def __init__(self, gameid: str, bad_players=[]):
         # TODO make it possible to manually create an AnalysisLeagueGame and initialize this thing.
         # it gets basic game info, like wins, team stuff and shit
         self.game = AnalysisLeagueGame.api_init(gameid)
+        for player in self.game.players:
+            if player in bad_players:
+                raise CustomExceptions.InputException("Game " + gameid + " contained a bad player(" + player + ")")
         # teamid: {role: name}
         team_100_players = self.game.positions["100"].copy()
         team_200_players = self.game.positions["200"].copy()
