@@ -4,17 +4,23 @@ from queue import Queue
 
 import RequestSender
 import APICollector
+import pandas as pd
 
-KEY = "RGAPI-6ec2c68c-5e1d-4ffa-821b-4af77abd8231"  # SINGLE KEY HERE
+KEY = "RGAPI-4da7baa0-1a43-4219-bd90-b9045bde0ac1"  # SINGLE KEY HERE
 RequestSender.add_keys([KEY])  # KEY HERE
 
 CSV_FILE = "../planning/games.csv"
+OTHER_SEEN_FILE = "../planning/data.csv"
 
-START_ID = 'NA1_4144890019'  # START GAME ID HERE
+START_ID = 'NA1_4136880710'  # START GAME ID HERE
 
 FINAL_LIST = []
-SEEN = [START_ID]
 GAME_QUEUE = Queue()
+
+
+def get_seen():
+    df2 = pd.read_csv(OTHER_SEEN_FILE)
+    return df2['gameid'].tolist()
 
 
 def grab_participant_puuids(matchid):
@@ -37,9 +43,12 @@ def write_to_csv(games: List):
             writist.writerow([game])
 
 
+SEEN = [START_ID] + get_seen()
+print("length of seen: " + str(len(SEEN)))
+
 puuids = grab_participant_puuids(START_ID)
-go = input("end to stop(" + str(len(FINAL_LIST)) + " games found)")
-while go != "end":
+no_games = int(input("no. games: "))
+while len(FINAL_LIST) < no_games:
     print("running...")
     for puuid in puuids:
         for game in grab_participant_past_game(puuid):
@@ -52,6 +61,14 @@ while go != "end":
         new_game_id = GAME_QUEUE.get()
     SEEN.append(new_game_id)
     puuids = grab_participant_puuids(new_game_id)
-    go = input("end to stop(" + str(len(FINAL_LIST)) + " games found)")
+    print("have " + str(len(FINAL_LIST)) + " games so far...")
 
-write_to_csv(FINAL_LIST)
+FINAL_LIST = list(set(FINAL_LIST))
+FINAL_FINAL_LIST = []
+for gameid in FINAL_LIST:
+    if gameid not in SEEN:
+        FINAL_FINAL_LIST.append(gameid)
+
+print("going to write " + str(len(FINAL_FINAL_LIST)) + " games")
+
+write_to_csv(FINAL_FINAL_LIST)
