@@ -146,8 +146,8 @@ def add_keys_with_offset(main_dict, other_dict, offset=""):
 
 
 def main():
-    API_KEYS = ["RGAPI-9fd7fa33-fcb6-4ef9-9a14-83e9ba862cfd", "RGAPI-a676a261-a368-4755-8ad0-f8cffe58c901",
-                "RGAPI-66010a3e-5e65-4ad3-96d2-852f0d50fe23", "RGAPI-7fd8ada8-d3f8-494d-b726-c54191eb67e4"]
+    API_KEYS = ["RGAPI-8e5e9d6f-f056-4e46-930f-6c5d6debf012", "RGAPI-65dd74cf-5f64-4850-a8d3-ec04bd6ff6be",
+                "RGAPI-c65f09d8-9acb-42c8-be1e-39f03a95856a", "RGAPI-68b08811-e599-4e93-b37e-950c75f532bd"]
     Logger.VERBOSITY_LEVEL = "ALL"
     TARGET_OBS = int(input("target # of observations: "))
 
