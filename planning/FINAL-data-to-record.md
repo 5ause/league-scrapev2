@@ -1,3 +1,5 @@
+Mote: 420 is ranked 5x5 queues, 400 is any draft pick queues, so for lower elo that's probably better.
+
 Summoner name, id, puuid from summoner v4(for all players in the match)
 
 Then for each player, get the following:
