@@ -11,8 +11,8 @@ import MainObservation
 from MainObservation import GameObservation
 import pandas as pd
 
-CSV_FILE = "../planning/data.csv"
-GAME_FILE = "../planning/games.csv"
+CSV_FILE = "../data/highelo/data.csv"
+GAME_FILE = "../data/highelo/games.csv"
 BAD_SUMMONER_FILE = "../planning/bad_summoners.csv"
 COLUMNS = ['gameid', 'winning_team', '100_TOP_avg_game_time', '100_TOP_positions_played', '100_TOP_avg_kda',
            '100_TOP_avg_kp', '100_TOP_avg_vision', '100_TOP_avg_cs', '100_TOP_goldpm', '100_TOP_dmgpm',

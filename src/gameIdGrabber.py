@@ -9,8 +9,8 @@ import pandas as pd
 KEY = "RGAPI-7394ad19-a9f9-45a2-ad8d-a3c87bdf666d"  # SINGLE KEY HERE
 RequestSender.add_keys([KEY])  # KEY HERE
 
-CSV_FILE = "../planning/games.csv"
-OTHER_SEEN_FILE = "../planning/data.csv"
+CSV_FILE = "../data/highelo/games.csv"
+OTHER_SEEN_FILE = "../data/highelo/data.csv"
 
 START_ID = 'NA1_4155542686'  # START GAME ID HERE
 
