@@ -6,7 +6,7 @@ import RequestSender
 import APICollector
 import pandas as pd
 
-KEY = "RGAPI-8e5e9d6f-f056-4e46-930f-6c5d6debf012"  # SINGLE KEY HERE
+KEY = "RGAPI-7394ad19-a9f9-45a2-ad8d-a3c87bdf666d"  # SINGLE KEY HERE
 RequestSender.add_keys([KEY])  # KEY HERE
 
 CSV_FILE = "../planning/games.csv"

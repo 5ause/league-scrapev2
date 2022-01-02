@@ -101,6 +101,7 @@ def get_game_stats(pd: PlayerData):
         indiv_data = game.individual_data
         # position
         total_time += game.game_time
+        # TODO older versions give milliseconds, if this is >1000 then divide by 1000 basically...
         positions.append(indiv_data["role"])
         total_kda += (indiv_data["kills"] + indiv_data["assists"]) / max(1, indiv_data["deaths"])
         total_kp += (indiv_data["kills"] + indiv_data["assists"]) / max(1, game.team_kills[indiv_data["team"]])
