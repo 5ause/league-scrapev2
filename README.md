@@ -8,7 +8,17 @@ stats website, LeagueOfGraphs.com.
 
 It then saves the data to a csv.
 
-## Files
+# IMPORTANT
+
+[Data analysis/model creation](writeup/Riot_V2.ipynb)
+
+[Brief explanation of how the scraper works](writeup/scraping.md)
+
+[2022/01/02] I'm currently in second year University, so my only experience with data cleaning/analysis comes from my Intro to Stats course and the few Kaggle competitions that I've done. I quickly cleaned the data and fitted a basic model in the above notebook.
+
+(This is the second time I've done this, so I'm just keeping track of my experience with each iteration. Around 1 year ago, I built a data collector that only takes data from the riot games api. I created a model in R that gave me ~60% accuracy on low elo games)
+
+# Check out the code!
 
 These can all be found in the [src](src) folder.
 
