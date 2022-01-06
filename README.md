@@ -32,3 +32,14 @@ data from the API and from the web, respectively
 
 [MainObservation](src/MainObservation.py) puts together the APICollector and WebScrapeCollector information
 and produces a formatted dictionary of data, which is flattened in main.py.
+
+# Next steps
+
+ - gather more data
+ - feature engineering
+ - try excluding na values, or processing them some other way
+ - treat outliers
+ - feature selection, try selecing important-er features...
+ - try logistic regression or something ??? how does that work
+ - try other kinds of classification
+ - tune the random forest algorithm
