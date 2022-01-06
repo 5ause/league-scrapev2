@@ -48,3 +48,5 @@ and produces a formatted dictionary of data, which is flattened in main.py.
 
 [random forest fine tuning](https://www.analyticsvidhya.com/blog/2015/06/tuning-random-forest-model/)
 
+[ensemble methods](https://www.analyticsvidhya.com/blog/2015/08/introduction-ensemble-learning/)
+
