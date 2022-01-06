@@ -43,3 +43,7 @@ and produces a formatted dictionary of data, which is flattened in main.py.
  - try logistic regression or something ??? how does that work
  - try other kinds of classification
  - tune the random forest algorithm
+
+[how to improve my model](https://www.analyticsvidhya.com/blog/2015/12/improve-machine-learning-results/)
+[random forest fine tuning](https://www.analyticsvidhya.com/blog/2015/06/tuning-random-forest-model/)
+
