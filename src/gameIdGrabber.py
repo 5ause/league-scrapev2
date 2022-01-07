@@ -6,13 +6,13 @@ import RequestSender
 import APICollector
 import pandas as pd
 
-KEY = "RGAPI-7394ad19-a9f9-45a2-ad8d-a3c87bdf666d"  # SINGLE KEY HERE
+KEY = "RGAPI-b1265fa5-f810-4fd1-abb6-f17b0abe4fa9"  # SINGLE KEY HERE
 RequestSender.add_keys([KEY])  # KEY HERE
 
 CSV_FILE = "../data/highelo/games.csv"
 OTHER_SEEN_FILE = "../data/highelo/data.csv"
 
-START_ID = 'NA1_4155542686'  # START GAME ID HERE
+START_ID = 'NA1_4159813533'  # START GAME ID HERE
 
 FINAL_LIST = []
 GAME_QUEUE = Queue()
@@ -31,7 +31,7 @@ def grab_participant_puuids(matchid):
 
 
 def grab_participant_past_game(puuid) -> List[str]:
-    variables = {"API_KEY": KEY, "PUUID": puuid, "COUNT": "10"}
+    variables = {"API_KEY": KEY, "PUUID": puuid, "COUNT": "5"}
     url = APICollector.PAST_MATCHES_URL
     return RequestSender.send_request(url, variables=variables).json()
 
