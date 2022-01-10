@@ -13,6 +13,7 @@ def create_player(summoner_name: str):
         Logger.debug("Attempting to get info", summoner_name)
         bsi = BasicSummonerInfo(summoner_name)
         ranked_info = SummonerRankedInfo(bsi).info
+        Logger.verbose(str(ranked_info), "MainObs.create_player")
         games_to_investigate = SummonerGameBuffer(bsi)
         games = []
         for matchid in games_to_investigate.matches:
@@ -74,7 +75,10 @@ def check_ranked_stats(pd: PlayerData):
         if key in pd.ranked_info:
             continue
         else:
-            pd.ranked_info.info[key] = None
+            Logger.verbose(str(pd.ranked_info))
+            # TODO changed from ranked_info.info to ranked_info
+            # I think this block has never been called before. ranked_info is a dict.
+            pd.ranked_info[key] = None
             Logger.warning("Missing ranked " + key + " for player " + pd.basic.summoner_name)
 
 

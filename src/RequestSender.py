@@ -43,7 +43,7 @@ def process_url(url, variables):
 
 
 def get_api_key(api_key=None) -> str:
-    Logger.verbose("get_api_key_called")
+    # Logger.verbose("get_api_key_called")
     time_between_reqs = 1.2
     # int(time.time()) is in seconds ok
     # find the least recent key

@@ -146,8 +146,8 @@ def add_keys_with_offset(main_dict, other_dict, offset=""):
 
 
 def main():
-    API_KEYS = ["RGAPI-b1265fa5-f810-4fd1-abb6-f17b0abe4fa9", "RGAPI-39278d34-b37f-4d7c-93d6-8a2f9cb7933b",
-                "RGAPI-cd381e19-0a70-4fe3-9eae-a6cbd5c8b9ff", "RGAPI-c5be9355-3dc0-4a73-8c82-03c420777794"]
+    API_KEYS = ["RGAPI-65e65ae1-ec3c-4d38-be48-61d2b071ee60", "RGAPI-5201c738-c509-4d32-ae9d-ad219a0e3459",
+                "RGAPI-4b5efe47-8737-443a-a005-8df2d113d467", "RGAPI-267c6850-8273-4291-bcfa-75bfa657aaa2"]
     Logger.VERBOSITY_LEVEL = "ALL"
     TARGET_OBS = int(input("target # of observations: "))
 
@@ -183,6 +183,7 @@ def main():
             print(traceback.format_exc())
             Logger.alert("halted data collection for " + gameid + ". Message: " + str(e), str(type(e)))
         except Exception as e:
+            print(traceback.format_exc())
             Logger.alert("halted data collection for " + gameid + ". Message: " + str(e), str(type(e)))
             errors["other"].append(str(e))
         finally:

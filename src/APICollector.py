@@ -46,6 +46,7 @@ class BasicSummonerInfo:
 class SummonerRankedInfo:
     def __init__(self, bsi: BasicSummonerInfo):
         response = send_league_v4(bsi)
+        Logger.verbose(str(response.content), "GETTING RANKED INFO VERBOSE")
         self.info = process_league_v4(get_rgapi_json(response))
         Logger.debug("got ranked info for " + bsi.summoner_name)
 
