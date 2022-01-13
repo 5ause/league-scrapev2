@@ -6,13 +6,13 @@ import RequestSender
 import APICollector
 import pandas as pd
 
-KEY = "RGAPI-65e65ae1-ec3c-4d38-be48-61d2b071ee60"  # SINGLE KEY HERE
+KEY = "RGAPI-00c7a9be-be3a-4833-9c65-0030abfde084"  # SINGLE KEY HERE
 RequestSender.add_keys([KEY])  # KEY HERE
 
 CSV_FILE = "../data/highelo/games.csv"
 OTHER_SEEN_FILE = "../data/highelo/data.csv"
 
-START_ID = 'NA1_4167781912'  # START GAME ID HERE
+START_ID = 'NA1_4171314524'  # START GAME ID HERE
 
 lst = [
     "NA1_4171314524",
