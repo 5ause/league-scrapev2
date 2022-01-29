@@ -1,22 +1,26 @@
 # league-scrapev2
 
-This is a web scraper that measures over 200 variables for matches of the popular game,
-League of Legends.
+# Report
 
-It gathers data directly from the Riot Games API, as well as from web-scraping the popular
+Writeups are in the [writeups](writeup) folder.
+
+**THE REPORT** can be found [here](writeup/Riot%20Games%20Writeup.pdf)
+
+# Basic
+
+The python portion of this project(in the [src](src) folder) is a web scraper that measures over 200 variables for matches of the popular game,
+League of Legends. It gathers data directly from the Riot Games API, as well as from web-scraping the popular
 stats website, LeagueOfGraphs.com.
 
-It then saves the data to a csv.
+Data that was collected can be found in the [data](data) folder.
 
-# IMPORTANT
+I created a classification model with ~82% test accuracy, which can be found in the [writeups](writeup) folder
 
-[Data analysis/model creation](writeup/Riot_V2.ipynb)
+# Notes
 
-[Brief explanation of how the scraper works](writeup/scraping.md)
+I am currently in second year university. For some reason, I keep coming back to predicting League of Legends outcomes, using my newfound knowledge. Around 1 year ago, I built a data collector that only takes data from the riot games api. I used a single decision tree to create a model in R that gave me ~60% accuracy on low ranking games.
 
-[2022/01/02] I'm currently in second year University, so my only experience with data cleaning/analysis comes from my Intro to Stats course and the few Kaggle competitions that I've done. I quickly cleaned the data and fitted a basic model in the above notebook.
-
-(This is the second time I've done this, so I'm just keeping track of my experience with each iteration. Around 1 year ago, I built a data collector that only takes data from the riot games api. I created a model in R that gave me ~60% accuracy on low elo games)
+This year, I used a random forest in python, added web scraping and did more exploratory data analysis before making the model.
 
 # Check out the code!
 
@@ -33,16 +37,7 @@ data from the API and from the web, respectively
 [MainObservation](src/MainObservation.py) puts together the APICollector and WebScrapeCollector information
 and produces a formatted dictionary of data, which is flattened in main.py.
 
-# Next steps
-
- - gather more data
- - feature engineering
- - try excluding na values, or processing them some other way
- - treat outliers
- - feature selection, try selecing important-er features...
- - try logistic regression or something ??? how does that work
- - try other kinds of classification
- - tune the random forest algorithm
+# Some links that I found useful
 
 [how to improve my model](https://www.analyticsvidhya.com/blog/2015/12/improve-machine-learning-results/)
 
