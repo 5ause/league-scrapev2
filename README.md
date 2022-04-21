@@ -2,7 +2,7 @@
 
 # Report
 
-Writeups are in the [writeups](writeup) folder.
+The data analysis notebook can be found [here](Riot_01202022.ipynb)
 
 **THE REPORT** can be found [here](writeup/Riot%20Games%20Writeup.pdf)
 
