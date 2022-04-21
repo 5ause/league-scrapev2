@@ -6,23 +6,18 @@ The data analysis notebook can be found [here](Riot_01202022.ipynb)
 
 **THE REPORT** can be found [here](writeup/Riot%20Games%20Writeup.pdf)
 
-# Basic
+# The Project
 
-The python portion of this project(in the [src](src) folder) is a web scraper that measures over 200 variables for matches of the popular game,
-League of Legends. It gathers data directly from the Riot Games API, as well as from web-scraping the popular
+Using web scraping and the official Riot Games API, I collected useful data from thousands of games of the popular game, League of Legends. League of Legends is a game in which two teams compete to destroy each other's base. I analyzed the data and created a model to classify games as "win" or "loss" for the blue team.
+
+The python portion of this project(in the [src](src) folder) is a web scraper that measures over 200 variables for matches of the game. It gathers data directly from the Riot Games API, as well as from web-scraping the popular
 stats website, LeagueOfGraphs.com.
 
 Data that was collected can be found in the [data](data) folder.
 
-I created a classification model with ~82% test accuracy, which can be found in the [writeups](writeup) folder
+I created a classification model with ~82% test accuracy, which can be found in the [data analysis notebook](Riot_01202022.ipynb)
 
-# Notes
-
-I am currently in second year university. For some reason, I keep coming back to predicting League of Legends outcomes, using my newfound knowledge. Around 1 year ago, I built a data collector that only takes data from the riot games api. I used a single decision tree to create a model in R that gave me ~60% accuracy on low ranking games.
-
-This year, I used a random forest in python, added web scraping and did more exploratory data analysis before making the model.
-
-# Check out the code!
+# The code
 
 These can all be found in the [src](src) folder.
 
