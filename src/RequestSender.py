@@ -28,6 +28,8 @@ def send_request(url: str, variables=dict(), headers=dict(), method="GET") -> re
     return response
 
 
+# eg. http://google.com/q=<VAR1>+<VAR2> where {"VAR1": "hello", "VAR2": "world"}
+# http://google.com/q=hello+world
 def process_url(url, variables):
     if "<API_KEY>" in url and "API_KEY" not in variables:
         key = get_api_key()

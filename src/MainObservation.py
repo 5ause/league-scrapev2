@@ -11,9 +11,12 @@ import Logger
 def create_player(summoner_name: str):
     try:
         Logger.debug("Attempting to get info", summoner_name)
+        # basic info
         bsi = BasicSummonerInfo(summoner_name)
         ranked_info = SummonerRankedInfo(bsi).info
         Logger.verbose(str(ranked_info), "MainObs.create_player")
+
+        # games info
         games_to_investigate = SummonerGameBuffer(bsi)
         games = []
         for matchid in games_to_investigate.matches:
@@ -26,6 +29,9 @@ def create_player(summoner_name: str):
 
 
 class PlayerData:
+    """
+    Basic player data in object form
+    """
     def __init__(self, bsi, ranked_info, games):
         self.basic = bsi
         self.ranked_info = ranked_info
@@ -39,6 +45,9 @@ class PlayerData:
 
 
 class GameObservation:
+    """
+    Takes gameid, gets information for each player on each team
+    """
     # you enter a game id
     def __init__(self, gameid: str, bad_players=[]):
         # TODO make it possible to manually create an AnalysisLeagueGame and initialize this thing.

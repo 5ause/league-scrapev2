@@ -72,22 +72,39 @@ COLUMNS = ['gameid', 'winning_team', '100_TOP_avg_game_time', '100_TOP_positions
 
 
 def get_seen():
+    """
+    Gets gameids of matches that we've processed already
+    :return:
+    """
     df = pd.read_csv(CSV_FILE)
     return df['gameid'].tolist()
 
 
 def get_bad_summoners():
+    """
+    Gets names of players with badly encoded usernames
+    :return:
+    """
     df = pd.read_csv(BAD_SUMMONER_FILE)
     return df['names'].tolist()
 
 
 def add_bad_summoner(name):
+    """
+    Write to the bad summoner file
+    :param name:
+    :return:
+    """
     with open(BAD_SUMMONER_FILE, "a", newline="", encoding="utf-8") as csvfile:
         writist = csv.writer(csvfile, lineterminator="\n")
         writist.writerow([name])
 
 
 def get_games():
+    """
+    Returns a queue of game_ids to look at
+    :return:
+    """
     df = pd.read_csv(GAME_FILE)
     game_queue = Queue()
     for gameid in df['gameid'].tolist():
@@ -96,8 +113,13 @@ def get_games():
 
 
 # THE MAIN METHOD
-# TODO learn sql and write to a database
 def get_observation(matchid, bad_summoners=[]):
+    """
+    Given a match_id, collects data on all 10 players and returns it as a flattened dictionary
+    :param matchid:
+    :param bad_summoners:
+    :return:
+    """
     obs = GameObservation(matchid, bad_players=bad_summoners)
     observation_dict = MainObservation.get_alllll_stats(obs)
     observation_dict["gameid"] = matchid
@@ -106,6 +128,11 @@ def get_observation(matchid, bad_summoners=[]):
 
 
 def write_observation(observation):
+    """
+    Writes flattened_dictionary of data to a file
+    :param observation:
+    :return:
+    """
     with open(CSV_FILE, "a", newline="") as csvfile:
         writist = csv.DictWriter(csvfile, fieldnames=COLUMNS, lineterminator="\n")
         writist.writerow(observation)
@@ -125,6 +152,11 @@ def get_columns():
 
 
 def flatten_obs_dict(obs_dict: Dict):
+    """
+    Flattens observation dictionary. See planning folder for more details.
+    :param obs_dict:
+    :return:
+    """
     ret_dict = dict()
     ret_dict["gameid"] = obs_dict.pop("gameid")
     ret_dict["winning_team"] = obs_dict.pop("winning_team")
